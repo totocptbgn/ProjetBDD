@@ -1,0 +1,3 @@
+/*
+Ce fichier contient les requetes.
+*/
