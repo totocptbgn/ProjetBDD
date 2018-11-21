@@ -62,7 +62,6 @@ public class RandomiseName {
         int bool;
 
         PrintWriter pw = createFile("insert.sql");
-        pw.println("INSERT INTO /*                       */");
         for (int i = 0; i < n; i++) {
             randN = rand.nextInt(name.size());
             age = rand.nextInt(19) + 17;
