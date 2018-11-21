@@ -67,7 +67,7 @@ CREATE TABLE Medaille (
 	FOREIGN KEY (IDAthlete) REFERENCES Athlete(IDAthlete),
 	FOREIGN KEY (IDAthlete) REFERENCES Equipe(IDequipe)
 );
-CREATE TABLE Epreuve-Athlete (
+CREATE TABLE Epreuve_Athlete (
 	IDAthlete int,
 	IDEpreuve int,
 	temps int,
@@ -75,7 +75,7 @@ CREATE TABLE Epreuve-Athlete (
 	FOREIGN KEY (IDAthlete) REFERENCES Athlete(IDAthlete),
 	FOREIGN KEY (IDEpreuve) REFERENCES Epreuve(IDEpreuve)
 );
-CREATE TABLE Epreuve-Equipe (
+CREATE TABLE Epreuve_Equipe (
 	IDequipe int,
 	IDEpreuve int,
 	temps int,
