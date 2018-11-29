@@ -10,6 +10,12 @@ DROP TABLE IF EXISTS EpreuveCollective CASCADE;
 DROP TABLE IF EXISTS Match CASCADE;
 DROP TABLE IF EXISTS Medaille CASCADE;
 
+CREATE TABLE Sport (
+	type text not null,
+	nomSport text not null,
+	IDSport serial primary key
+);
+
 CREATE TABLE Athlete (
 	IDAthlete serial primary key,
 	NomAthlete text not null,
@@ -28,11 +34,6 @@ CREATE TABLE Equipe (
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
 
-CREATE TABLE Sport (
-	type text not null,
-	nomSport text not null,
-	IDSport serial primary key
-);
 
 CREATE TABLE EpreuveIndividuel (
 	IDSport int,
@@ -43,7 +44,9 @@ CREATE TABLE EpreuveIndividuel (
 	IDGagnantBronze int,
 	dateEpreuve date,
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport),
-	FOREIGN KEY (IDGagnantOr,IDGagnantArgent,IDGagnantBronze) REFERENCES Athlete(IDAthlete)
+	FOREIGN KEY (IDGagnantOr) REFERENCES Athlete(IDAthlete),
+	FOREIGN KEY (IDGagnantArgent) REFERENCES Athlete(IDAthlete),
+	FOREIGN KEY (IDGagnantBronze) REFERENCES Athlete(IDAthlete)
 );
 
 CREATE TABLE EpreuveCollective (
@@ -54,7 +57,9 @@ CREATE TABLE EpreuveCollective (
 	IDEquipeGagnanteArgent int,
 	IDEquipeGagnanteBronze int,
 	dateEpreuve date,
-	FOREIGN KEY (IDEquipeGagnante,IDEquipePerdante) REFERENCES Equipe(IDequipe),
+	FOREIGN KEY (IDEquipeGagnanteOr) REFERENCES Equipe(IDequipe),
+	FOREIGN KEY (IDEquipeGagnanteArgent) REFERENCES Equipe(IDequipe),
+	FOREIGN KEY (IDEquipeGagnanteBronze) REFERENCES Equipe(IDequipe),
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
 
