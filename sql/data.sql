@@ -1,3 +1,3 @@
 /*
-Ce fichier est à utiliser pour remplir les créer avec 'arch.sql'.
+Ce fichier est à utiliser pour remplir les tables crées avec 'arch.sql'.
 */
