@@ -20,7 +20,6 @@ CREATE TABLE Athlete (
 	IDAthlete serial primary key,
 	NomAthlete text not null,
 	Pays text not null,
-	NbrMedailles integer,
 	IDSport int,
 	Age int,
 	sexe text not null,
@@ -31,6 +30,7 @@ CREATE TABLE Equipe (
 	IDequipe serial primary key,
 	Pays text not null,
 	IDSport int,
+	sexe text,
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
 
@@ -42,7 +42,6 @@ CREATE TABLE EpreuveIndividuel (
 	IDGagnantOr int,
 	IDGagnantArgent int,
 	IDGagnantBronze int,
-	dateEpreuve date,
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport),
 	FOREIGN KEY (IDGagnantOr) REFERENCES Athlete(IDAthlete),
 	FOREIGN KEY (IDGagnantArgent) REFERENCES Athlete(IDAthlete),
@@ -56,7 +55,6 @@ CREATE TABLE EpreuveCollective (
 	IDEquipeGagnanteOr int,
 	IDEquipeGagnanteArgent int,
 	IDEquipeGagnanteBronze int,
-	dateEpreuve date,
 	FOREIGN KEY (IDEquipeGagnanteOr) REFERENCES Equipe(IDequipe),
 	FOREIGN KEY (IDEquipeGagnanteArgent) REFERENCES Equipe(IDequipe),
 	FOREIGN KEY (IDEquipeGagnanteBronze) REFERENCES Equipe(IDequipe),
@@ -66,6 +64,7 @@ CREATE TABLE EpreuveCollective (
 CREATE TABLE Match (
 	NomMatch text not null,
 	IDMatch serial primary key,
+	dateMatch date,
 	IDEpreuve int,
 	IDGagnant int,
 	IDPerdant int,

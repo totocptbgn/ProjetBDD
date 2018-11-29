@@ -23,7 +23,5 @@ public class Randomnames {
             System.out.println('('+prenomH[i]+','+nom2[i]+','+"homme"+','+age+')');
             count++;
         }
-
-
     }
 }
