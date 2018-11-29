@@ -1,33 +1,39 @@
 /*
 Ce fichier crée et paramètre les tables.
 */
+
 DROP TABLE IF EXISTS Athlete CASCADE;
 DROP TABLE IF EXISTS Equipe CASCADE;
-DROP TABLE IF EXISTS Pays CASCADE;
+DROP TABLE IF EXISTS Sport CASCADE;
+DROP TABLE IF EXISTS EpreuveIndividuel CASCADE;
+DROP TABLE IF EXISTS EpreuveCollective CASCADE;
+DROP TABLE IF EXISTS Match CASCADE;
+DROP TABLE IF EXISTS Medaille CASCADE;
 
 CREATE TABLE Athlete (
 	IDAthlete serial primary key,
 	NomAthlete text not null,
 	Pays text not null,
 	NbrMedailles integer,
-	Sport text not null,
+	IDSport int,
 	Age int,
 	sexe text not null,
-	PRIMARY KEY (IDAthlete)
+	FOREIGN KEY (IDSport) REFERENCES sport(IDSport)
 );
+
 CREATE TABLE Equipe (
 	IDequipe serial primary key,
 	Pays text not null,
-	Sport text not null,
-	PRIMARY KEY (IDequipe)
+	IDSport int,
+	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
 
 CREATE TABLE Sport (
 	type text not null,
 	nomSport text not null,
-	IDSport serial primary key,
-	PRIMARY KEY (IDSport)
+	IDSport serial primary key
 );
+
 CREATE TABLE EpreuveIndividuel (
 	IDSport int,
 	nomEpreuve text not null,
@@ -36,10 +42,10 @@ CREATE TABLE EpreuveIndividuel (
 	IDGagnantArgent int,
 	IDGagnantBronze int,
 	dateEpreuve date,
-	PRIMARY KEY (IDEpreuve),
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport),
 	FOREIGN KEY (IDGagnantOr,IDGagnantArgent,IDGagnantBronze) REFERENCES Athlete(IDAthlete)
 );
+
 CREATE TABLE EpreuveCollective (
 	IDSport int,
 	nomEpreuve text not null,
@@ -48,26 +54,27 @@ CREATE TABLE EpreuveCollective (
 	IDEquipeGagnanteArgent int,
 	IDEquipeGagnanteBronze int,
 	dateEpreuve date,
-	PRIMARY KEY (IDEpreuve),
-	FOREIGN KEY (IDEquipeGagnante,IDEquipePerdante) REFERENCES Equipe(IDequipe)
+	FOREIGN KEY (IDEquipeGagnante,IDEquipePerdante) REFERENCES Equipe(IDequipe),
+	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
+
 CREATE TABLE Match (
 	NomMatch text not null,
 	IDMatch serial primary key,
 	IDEpreuve int,
 	IDGagnant int,
 	IDPerdant int,
-	PRIMARY KEY (IDMatch),
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve),
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve)
 );
+
 CREATE TABLE Medaille (
 	type text not null,
 	IDEquipe int,
 	IDAthlete int,
-	IDepreuve,
+	IDEpreuve int,
 	FOREIGN KEY (IDAthlete) REFERENCES Athlete(IDAthlete),
-	FOREIGN KEY (IDAthlete) REFERENCES Equipe(IDequipe)
-);
-CREATE TABLE Participation (
+	FOREIGN KEY (IDAthlete) REFERENCES Equipe(IDequipe),
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve),
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve)
 );
