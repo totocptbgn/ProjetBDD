@@ -9,11 +9,15 @@ DROP TABLE IF EXISTS EpreuveIndividuel CASCADE;
 DROP TABLE IF EXISTS EpreuveCollective CASCADE;
 DROP TABLE IF EXISTS Match CASCADE;
 DROP TABLE IF EXISTS Medaille CASCADE;
+DROP TABLE IF EXISTS Particpation CASCADE;
+DROP TABLE IF EXISTS GagnantMedaille CASCADE;
+DROP TABLE IF EXISTS MedailleEpreuves CASCADE;
+
 
 CREATE TABLE Sport (
-	type text not null,
-	nomSport text not null,
 	IDSport serial primary key
+	type text not null,
+	nomSport text not null
 );
 
 CREATE TABLE Athlete (
@@ -27,7 +31,7 @@ CREATE TABLE Athlete (
 );
 
 CREATE TABLE Equipe (
-	IDequipe serial primary key,
+	IDEquipe serial primary key,
 	Pays text not null,
 	IDSport int,
 	sexe text,
@@ -36,9 +40,9 @@ CREATE TABLE Equipe (
 
 
 CREATE TABLE EpreuveIndividuel (
+	IDEpreuve serial primary key,
 	IDSport int,
 	nomEpreuve text not null,
-	IDEpreuve serial primary key,
 	IDGagnantOr int,
 	IDGagnantArgent int,
 	IDGagnantBronze int,
@@ -49,9 +53,9 @@ CREATE TABLE EpreuveIndividuel (
 );
 
 CREATE TABLE EpreuveCollective (
+	IDEpreuve serial primary key,
 	IDSport int,
 	nomEpreuve text not null,
-	IDEpreuve serial primary key,
 	IDEquipeGagnanteOr int,
 	IDEquipeGagnanteArgent int,
 	IDEquipeGagnanteBronze int,
@@ -66,19 +70,39 @@ CREATE TABLE Match (
 	IDMatch serial primary key,
 	dateMatch date,
 	IDEpreuve int,
-	IDGagnant int,
-	IDPerdant int,
-	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve),
-	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve)
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve),
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve)
 );
 
 CREATE TABLE Medaille (
-	type text not null,
-	IDEquipe int,
-	IDAthlete int,
+	IDMedaille serial primary key,
+	type text not null
+);
+
+CREATE TABLE Particpation (
+	IDMatch int,
+	IDParticipant int,
+	IDStatut text,
+	PRIMARY KEY (IDMatch, IDParticipant),
+	FOREIGN KEY (IDParticipant) REFERENCES Athlete(IDAthlete),
+	FOREIGN KEY (IDParticipant) REFERENCES Equipe(IDEquipe),
+	FOREIGN KEY (IDMatch) REFERENCES Match(IDMatch)
+);
+
+CREATE TABLE GagnantMedaille (
+	IDMedaille int,
+	IDGagnant int,
+	PRIMARY KEY (IDMedaille, IDGagnant),
+	FOREIGN KEY (IDMedaille) REFERENCES Medaille(IDMedaille),
+	FOREIGN KEY (IDGagnant) REFERENCES Athlete(IDAthlete),
+	FOREIGN KEY (IDGagnant) REFERENCES Equipe(IDEquipe)
+);
+
+CREATE TABLE MedailleEpreuves (
+	IDMedaille int,
 	IDEpreuve int,
-	FOREIGN KEY (IDAthlete) REFERENCES Athlete(IDAthlete),
-	FOREIGN KEY (IDAthlete) REFERENCES Equipe(IDequipe),
-	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve),
-	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve)
+	PRIMARY KEY (IDMedaille, IDEpreuve),
+	FOREIGN KEY (IDMedaille) REFERENCES Medaille(IDMedaille),
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve),
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve)
 );
