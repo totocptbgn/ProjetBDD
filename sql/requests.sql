@@ -1,7 +1,8 @@
 /*
-
 Ce fichier contient les requetes.
+*/
 
+/*
     SELECT * FROM Athlete;
     SELECT * FROM Equipe;
     SELECT * FROM Sport;
@@ -10,7 +11,6 @@ Ce fichier contient les requetes.
     SELECT * FROM Match;
     SELECT * FROM Medaille;
     SELECT * FROM Particpation;
-
 */
 
 /* Dificulté I */
