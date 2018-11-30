@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS MedailleEpreuves CASCADE;
 
 
 CREATE TABLE Sport (
-	IDSport serial primary key
+	IDSport serial primary key,
 	type text not null,
 	nomSport text not null
 );
@@ -27,7 +27,7 @@ CREATE TABLE Athlete (
 	IDSport int,
 	Age int,
 	sexe text not null,
-	FOREIGN KEY (IDSport) REFERENCES sport(IDSport)
+	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
 
 CREATE TABLE Equipe (
