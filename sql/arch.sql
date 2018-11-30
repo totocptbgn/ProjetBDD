@@ -76,7 +76,13 @@ CREATE TABLE Match (
 
 CREATE TABLE Medaille (
 	IDMedaille serial primary key,
-	type text not null
+	IDEpreuve int,
+	IDGagnant int,
+	type text not null,
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve),
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve),
+	FOREIGN KEY (IDGagnant) REFERENCES Athlete(IDAthlete),
+	FOREIGN KEY (IDGagnant) REFERENCES Equipe(IDEquipe)
 );
 
 CREATE TABLE Particpation (
@@ -87,22 +93,4 @@ CREATE TABLE Particpation (
 	FOREIGN KEY (IDParticipant) REFERENCES Athlete(IDAthlete),
 	FOREIGN KEY (IDParticipant) REFERENCES Equipe(IDEquipe),
 	FOREIGN KEY (IDMatch) REFERENCES Match(IDMatch)
-);
-
-CREATE TABLE GagnantMedaille (
-	IDMedaille int,
-	IDGagnant int,
-	PRIMARY KEY (IDMedaille, IDGagnant),
-	FOREIGN KEY (IDMedaille) REFERENCES Medaille(IDMedaille),
-	FOREIGN KEY (IDGagnant) REFERENCES Athlete(IDAthlete),
-	FOREIGN KEY (IDGagnant) REFERENCES Equipe(IDEquipe)
-);
-
-CREATE TABLE MedailleEpreuves (
-	IDMedaille int,
-	IDEpreuve int,
-	PRIMARY KEY (IDMedaille, IDEpreuve),
-	FOREIGN KEY (IDMedaille) REFERENCES Medaille(IDMedaille),
-	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve),
-	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve)
 );
