@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS MedailleEpreuves CASCADE;
 
 CREATE TABLE Sport (
 	IDSport serial primary key,
-	type text not null,
+	type text not null CHECK (type IN ('Collectif','Individuel')),
 	nomSport text not null
 );
 
@@ -35,8 +35,8 @@ CREATE TABLE Equipe (
 	Pays text not null,
 	IDSport int,
 	sexe text,
-	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport),
-	CHECK (Equipe.IDSport == Sport.IDSport AND Sport.type == 'Collectif')
+	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
+	--CHECK (Equipe.IDSport == Sport.IDSport AND Sport.type == 'Collectif')
 );
 
 
@@ -50,8 +50,8 @@ CREATE TABLE EpreuveIndividuel (
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport),
 	FOREIGN KEY (IDGagnantOr) REFERENCES Athlete(IDAthlete),
 	FOREIGN KEY (IDGagnantArgent) REFERENCES Athlete(IDAthlete),
-	FOREIGN KEY (IDGagnantBronze) REFERENCES Athlete(IDAthlete),
-	CHECK (EpreuveIndividuel.IDSport == Sport.IDSport AND Sport.type == 'Individuel')
+	FOREIGN KEY (IDGagnantBronze) REFERENCES Athlete(IDAthlete)
+	--CHECK (EpreuveIndividuel.IDSport == Sport.IDSport AND Sport.type == 'Individuel')
 
 );
 
@@ -65,8 +65,8 @@ CREATE TABLE EpreuveCollective (
 	FOREIGN KEY (IDEquipeGagnanteOr) REFERENCES Equipe(IDequipe),
 	FOREIGN KEY (IDEquipeGagnanteArgent) REFERENCES Equipe(IDequipe),
 	FOREIGN KEY (IDEquipeGagnanteBronze) REFERENCES Equipe(IDequipe),
-	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport),
-	CHECK (EpreuveCollective.IDSport == Sport.IDSport AND Sport.type == 'Collectif')
+	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
+	--CHECK (EpreuveCollective.IDSport == Sport.IDSport AND Sport.type == 'Collectif')
 
 );
 
