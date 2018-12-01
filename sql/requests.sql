@@ -1,6 +1,6 @@
-/*
-Ce fichier contient les requetes.
-*/
+
+-- Ce fichier contient les requetes.
+
 
 /*
     SELECT * FROM Athlete;
@@ -13,13 +13,15 @@ Ce fichier contient les requetes.
     SELECT * FROM Particpation;
 */
 
-/* Dificulté I */
+-- Dificulté I
 
+-- 1
 SELECT NomAthlete
 FROM Athlete, Medaille
 WHERE Athlete.IDAthlete = Medaille.IDGagnant
 AND Athlete.Pays = 'Italie';
 
+-- 2
 SELECT NomAthlete, Pays, type
 FROM Medaille, Athlete, EpreuveIndividuel
 WHERE Athlete.IDAthlete = Medaille.IDGagnant
