@@ -28,4 +28,5 @@ WHERE Athlete.IDAthlete = Medaille.IDGagnant
 AND Medaille.IDEpreuve = EpreuveIndividuel.IDEpreuve
 AND (EpreuveIndividuel.nomEpreuve = '100m'
   OR EpreuveIndividuel.nomEpreuve = '200m'
-  OR EpreuveIndividuel.nomEpreuve = '400m');
+  OR EpreuveIndividuel.nomEpreuve = '400m'
+);
