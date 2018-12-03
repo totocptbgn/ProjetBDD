@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS MedailleEpreuves CASCADE;
 
 
 CREATE TABLE Sport (
-	IDSport serial primary key,
+	IDSport SERIAL PRIMARY KEY,
 	type text not null CHECK (type IN ('Collectif', 'Individuel')),
 	nomSport text not null
 );
