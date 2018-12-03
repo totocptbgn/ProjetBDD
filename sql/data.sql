@@ -2,7 +2,7 @@
 -- Ce fichier est à utiliser pour remplir les tables crées avec 'arch.sql'.
 
 
-INSERT INTO Sport(type, nomSport) VALUES
+INSERT INTO Sport (type, nomSport) VALUES
   ('Individuel','Natation'),
   ('Individuel','Equitation'),
   ('Individuel','Athlétisme'),
@@ -23,7 +23,7 @@ INSERT INTO Sport(type, nomSport) VALUES
   ('Individuel','tir à l arc'),
   ('Individuel','volley ball');
 
-INSERT INTO Athlete(NomAthlete, Pays, IDSport, sexe, age) VALUES
+INSERT INTO Athlete (NomAthlete, Pays, IDSport, sexe, age) VALUES
    ('Serena Armstrong','Espagne',2, 'femme' ,32),
    ('Azul Salamat','Autriche',13, 'femme' ,20),
    ('Lena Hamila','Australie',18, 'femme' ,18),
