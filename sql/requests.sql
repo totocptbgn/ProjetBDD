@@ -1,7 +1,6 @@
 
 -- Ce fichier contient les requetes.
 
-
 /*
     SELECT * FROM Athlete;
     SELECT * FROM Equipe;

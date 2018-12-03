@@ -70,9 +70,9 @@ CREATE TABLE EpreuveCollective (
 );
 
 CREATE TABLE Match (
-	NomMatch text not null,
+	NomMatch text,
 	IDMatch serial primary key,
-	dateMatch date,
+	dateMatch date NOT NULL,
 	IDEpreuve int,
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve),
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve)
