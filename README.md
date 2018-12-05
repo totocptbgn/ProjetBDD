@@ -1,6 +1,9 @@
 # ProjetBDD
 
-⚠️ `Le projet est en cours !` ⚠️
+⚠️ Le projet est en cours ! ⚠️
+
+Pour construire la base données : `psql --command "\i sql/arch.sql \i sql/data.sql"`
+
 
 ## Sujet
 
