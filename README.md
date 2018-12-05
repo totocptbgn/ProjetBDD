@@ -1,9 +1,11 @@
+
 # ProjetBDD
 
 ⚠️ Le projet est en cours ! ⚠️
 
 Pour construire la base données : `psql --command "\i sql/arch.sql \i sql/data.sql"`
 
+![Schéma](https://github.com/totocptbgn/ProjetBDD/blob/master/Sche%CC%81maEntite%CC%81Relation.png)
 
 ## Sujet
 
