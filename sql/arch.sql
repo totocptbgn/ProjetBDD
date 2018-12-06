@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS Medaille CASCADE;
 DROP TABLE IF EXISTS Particpation CASCADE;
 DROP TABLE IF EXISTS GagnantMedaille CASCADE;
 DROP TABLE IF EXISTS MedailleEpreuves CASCADE;
+DROP TABLE IF EXISTS Membres CASCADE;
 
 
 CREATE TABLE Sport (
@@ -38,7 +39,6 @@ CREATE TABLE Equipe (
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 	-- CHECK (Equipe.IDSport == Sport.IDSport AND Sport.type == 'Collectif')
 );
-
 
 CREATE TABLE EpreuveIndividuel (
 	IDEpreuve serial primary key,
