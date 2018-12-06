@@ -5,7 +5,7 @@
 
 Pour construire la base données : `psql --command "\i sql/arch.sql \i sql/data.sql"`
 
-![Schéma](https://github.com/totocptbgn/ProjetBDD/blob/master/Sch%C3%A9maEntit%C3%A9Relation.png)
+![Schéma](https://github.com/totocptbgn/ProjetBDD/blob/master/Schema_Entit%C3%A9es:Relations.pdf)
 
 ## Sujet
 
