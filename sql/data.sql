@@ -250,9 +250,7 @@ INSERT INTO Equipe (Pays, IDSport, sexe) VALUES
   ('Irak',15,'homme'),
   ('Autriche',4,'femme'),
   ('Autriche',4,'homme'),
-  ('Autriche',4,'femme'),
-  ('Autriche',4,'homme'),
-  ('Albanie',14,'femme'),
+  ('Albanie',4,'femme'),
   ('Albanie',14,'homme'),
   ('Maroc',18,'femme'),
   ('Maroc',18,'homme'),
@@ -276,3 +274,6 @@ INSERT INTO Equipe (Pays, IDSport, sexe) VALUES
   ('Chine',3,'homme'),
   ('Maroc',12,'femme'),
   ('Maroc',12,'homme');
+
+INSERT INTO EpreuveCollective (IDEpreuve,IDSport,nomEpreuve,IDEquipeGagnanteOr,IDEquipeGagnanteArgent,IDEquipeGagnanteBronze) VALUES
+    (4,'100m',23)
