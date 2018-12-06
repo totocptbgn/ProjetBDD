@@ -10,6 +10,8 @@
     SELECT * FROM Match;
     SELECT * FROM Medaille;
     SELECT * FROM Particpation;
+    SELECT * FROM Membres;
+
 */
 
 -- Dificulté I

@@ -98,3 +98,11 @@ CREATE TABLE Particpation (
 	FOREIGN KEY (IDParticipant) REFERENCES Equipe(IDEquipe),
 	FOREIGN KEY (IDMatch) REFERENCES Match(IDMatch)
 );
+
+CREATE TABLE Membres (
+	IDAthlete int,
+	IDEquipe int,
+	PRIMARY KEY (IDAthlete, IDEquipe),
+	FOREIGN KEY (IDAthlete) REFERENCES Athlete(IDAthlete),
+	FOREIGN KEY (IDEquipe) REFERENCES Equipe(IDEquipe)
+);
