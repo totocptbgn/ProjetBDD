@@ -531,7 +531,6 @@ INSERT INTO Equipe (Pays, IDSport, sexe) VALUES
  ('Etats Unis',19,'Femme'),
  ('Etats Unis',19,'Homme');
 
-<<<<<<< HEAD
 INSERT INTO EpreuveCollective (IDSport,nomEpreuve,Categorie,IDEquipeGagnanteOr,IDEquipeGagnanteArgent,IDEquipeGagnanteBronze) VALUES
     (4,'relais 4*400','femme',2,20,38),
     (4,'relais 4*400','homme',19,37,73),
@@ -546,7 +545,7 @@ INSERT INTO EpreuveCollective (IDSport,nomEpreuve,Categorie,IDEquipeGagnanteOr,I
     (7,'Double','femme',186,168,96),
     (7,'Double','homme',95,113,149),
     (8,'Tournois','femme',116,134,152),
-    (8,'Tournois','homme',151,169),
+    (8,'Tournois','homme',151,169,115),
     (9,'Tournois','femme',46,10,28),
     (9,'Tournois','homme',81,99,117),
     (15,'Fleuret par équipe','femme',16,88,124),
@@ -558,11 +557,11 @@ INSERT INTO EpreuveCollective (IDSport,nomEpreuve,Categorie,IDEquipeGagnanteOr,I
     (13,'double','femme',86,68,32),
     (13,'double','homme',85,31,13),
     (16,'double','femme',18,54,72),
-    (16,'double','homme',17,53,107)
+    (16,'double','homme',17,53,107),
     (19,'Tournois','femme',271,287,291),
     (19,'Tournois','homme',296,261,286);
 
-INSERT INTO EpreuveIndividuel(IDSport,nomEpreuve,Categorie,IDGagnantOr,IDGagnantArgent,IDGagnantBronze) VALUES
+/*INSERT INTO EpreuveIndividuel(IDSport,nomEpreuve,Categorie,IDGagnantOr,IDGagnantArgent,IDGagnantBronze) VALUES
     (1,'50 mètres nage libre','femme',7,21,56),
     (1,'100 mètres nage libre','femme',112,7,149),
     (1,'200 metres nage libre','femme',156,7,21),
@@ -574,8 +573,8 @@ INSERT INTO EpreuveIndividuel(IDSport,nomEpreuve,Categorie,IDGagnantOr,IDGagnant
     (2,'Complet','mixte',72,100,115),
     (2,'Saut d\'obstacle','mixte',152,167,136),
     (2,'Dressage','mixte',100,93,72),
-    (5,'Poutre','femme',61,),
-    (5,'Sol','femme'),
+    (5,'Poutre','femme',61,31,50),
+    (5,'Sol','femme',102,121),
     (5,'Barres asymétriques','femme'),
     (5,'Saut de cheval','femme'),
     (5,'Poutre','homme'),
@@ -597,74 +596,4 @@ INSERT INTO EpreuveIndividuel(IDSport,nomEpreuve,Categorie,IDGagnantOr,IDGagnant
     (17,'Tournois','femme'),
     (17,'Tournois','homme'),
     (18,'Tournois','femme'),
-    (18,'Tournois','femme');
-=======
-INSERT INTO EpreuveCollective (IDSport, nomEpreuve, Categorie, IDEquipeGagnanteOr, IDEquipeGagnanteArgent, IDEquipeGagnanteBronze) VALUES
-  (4, 'Relais 4*400', 'Femme', 2, 20, 38),
-  (4, 'Relais 4*400', 'Homme', 19, 37, 73),
-  (6, 'Deux de couple', 'Femme', 256, 238, 165),
-  (6, 'Quatre de couple', 'Femme', 184, 130, 111),
-  (6, 'Huit', 'Femme', 256, 130, 76),
-  (6, 'Deux avec barreur', 'Femme', 238, 4, 22),
-  (6, 'Deux de couple', 'Homme', 3, 93, 111),
-  (6, 'Quatre de couple', 'Homme', 93, 183, 237),
-  (6, 'Huit', 'Homme', 183, 129, 3),
-  (6, 'Deux avec barreur', 'Homme', 165, 147, 111),
-  (7, 'Double', 'Femme', 186, 168, 96),
-  (7, 'Double', 'Homme', 95, 113, 149),
-  (8, 'Tournois', 'Femme', 116, 134, 152),
-  (8, 'Tournois', 'Homme', 151, 169, 115),
-  (9, 'Tournois', 'Femme', 46, 10, 28),
-  (9, 'Tournois', 'Homme', 81, 99, 117),
-  (15, 'Fleuret par équipe', 'Femme', 16, 88, 124),
-  (15, 'Fleuret par équipe', 'Homme', 123, 15, 87),
-  (15, 'Epee par équipe', 'Femme', 15, 160, 195),
-  (15, 'Epee par equipe', 'Homme', 213, 267, 87),
-  (15, 'Sabre par equipe', 'Femme', 160, 88, 124),
-  (15, 'Sabre par equipe', 'Homme', 213, 15, 87),
-  (13, 'Double', 'Femme', 86, 68, 32),
-  (13, 'Double', 'Homme', 85, 31, 13),
-  (16, 'Double', 'Femme', 18, 54, 72),
-  (16, 'Double', 'Homme', 17, 53, 107),
-  (19, 'Tournois', 'Femme', 271, 287, 291),
-  (19, 'Tournois', 'Homme', 296, 261, 286);
-  
-/*
-INSERT INTO EpreuveIndividuel (IDSport,nomEpreuve,Categorie,IDGagnantOr,IDGagnantArgent,IDGagnantBronze) VALUES
-    (1,'50 mètres nage libre'),
-    (1,'100 mètres nage libre',),
-    (1,'200 metres nage libre'),
-    (1,'100 metres papillon'),
-    (1,'100 metre papillon'),
-    (1,'50 metres nage libre'),
-    (1,'100 metres nage libre'),
-    (1,'200 metres nage libre'),
-    (2,'Saut d\'obstacle'),
-    (2,'Dressage'),
-    (2,'Cross'),
-    (5,'Poutre'),
-    (5,'Sol'),
-    (5,'Barres asymétriques'),
-    (5,'Saut de cheval'),
-    (5,'Poutre'),
-    (5,'Sol'),
-    (5,'Saut de cheval'),
-    (5,'Barres asymétriques'),
-    (10,'Tournois poids lourd'),
-    (10,'Tournois poids lourd'),
-    (10,'Tournois poids leger'),
-    (10,'Tournois poids leger'),
-    (11,'Fleuret'),
-    (11,'Epee'),
-    (11,'Sabre'),
-    (11,'Fleuret'),
-    (11,'Epee'),
-    (11,'Sabre'),
-    (14,'Tournois'),
-    (14,'Tournois'),
-    (17,'Tournois'),
-    (17,'Tournois'),
-    (18,'Tournois'),
-    (18,'Tournois');
-*/
->>>>>>> 9adc9cd96d3ea530daaba04fc78bea580f10bb31
+    (18,'Tournois','femme');*/
