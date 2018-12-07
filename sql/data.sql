@@ -543,7 +543,7 @@ INSERT INTO EpreuveCollective (IDSport, nomEpreuve, Categorie, IDEquipeGagnanteO
   (7, 'Double', 'Femme', 186, 168, 96),
   (7, 'Double', 'Homme', 95, 113, 149),
   (8, 'Tournois', 'Femme', 116, 134, 152),
-  (8, 'Tournois', 'Homme', 151, 169),
+  (8, 'Tournois', 'Homme', 151, 169, 115),
   (9, 'Tournois', 'Femme', 46, 10, 28),
   (9, 'Tournois', 'Homme', 81, 99, 117),
   (15, 'Fleuret par équipe', 'Femme', 16, 88, 124),
@@ -555,7 +555,7 @@ INSERT INTO EpreuveCollective (IDSport, nomEpreuve, Categorie, IDEquipeGagnanteO
   (13, 'Double', 'Femme', 86, 68, 32),
   (13, 'Double', 'Homme', 85, 31, 13),
   (16, 'Double', 'Femme', 18, 54, 72),
-  (16, 'Double', 'Homme', 17, 53, 107)
+  (16, 'Double', 'Homme', 17, 53, 107),
   (19, 'Tournois', 'Femme', 271, 287, 291),
   (19, 'Tournois', 'Homme', 296, 261, 286);
 
