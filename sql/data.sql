@@ -26,7 +26,6 @@ INSERT INTO Athlete (NomAthlete, Pays, IDSport, sexe, age) VALUES
   ('Carlito Neves', 'Portugal', 5, 'Homme', 25),
   ('Zhen Shun', 'Chine', 12, 'Homme', 22),
   ('Tolstaya Valerievna', 'Russie', 5, 'Femme', 19),
-  ('Michael Phelps', 'Etats Unis', 1, 'Homme', 29),
   ('Tsuo Yixing', 'Chine', 11, 'Femme', 35),
   ('Berend Pultz', 'Allemagne', 4, 'Homme', 33),
   ('David Brown', 'Etats Unis', 5, 'Homme', 33),
@@ -225,7 +224,8 @@ INSERT INTO Athlete (NomAthlete, Pays, IDSport, sexe, age) VALUES
   ('Gilberto Seixas', 'Portugal', 8, 'Homme', 27),
   ('Adrian Barrios', 'Espagne', 5, 'Homme', 24),
   ('Emily Williams', 'Canada', 4, 'Femme', 20),
-  ('Lai Shi', 'Chine', 12, 'Femme', 34);
+  ('Lai Shi', 'Chine', 12, 'Femme', 34),
+  ('Michael Phelps', 'Etats Unis', 1, 'Homme', 29);
 
 INSERT INTO Equipe (Pays, IDSport, sexe) VALUES
   ('Etats Unis', 4, 'Homme'),
