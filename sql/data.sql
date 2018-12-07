@@ -530,7 +530,7 @@ INSERT INTO Equipe (Pays, IDSport, sexe) VALUES
   ('Etats Unis', 19, 'Femme'),
   ('Etats Unis', 19, 'Homme');
 
-INSERT INTO EpreuveCollective (IDSport,nomEpreuve,Categorie,IDEquipeGagnanteOr,IDEquipeGagnanteArgent,IDEquipeGagnanteBronze) VALUES
+INSERT INTO EpreuveCollective (IDSport, nomEpreuve, Sexe, IDEquipeGagnanteOr, IDEquipeGagnanteArgent, IDEquipeGagnanteBronze) VALUES
   (4, 'Relais 4*400', 'Femme', 2, 20, 38),
   (4, 'Relais 4*400', 'Homme',19, 37, 73),
   (6, 'Deux de couple', 'Femme', 256, 238, 165),
@@ -562,7 +562,7 @@ INSERT INTO EpreuveCollective (IDSport,nomEpreuve,Categorie,IDEquipeGagnanteOr,I
 
 /*
 
-INSERT INTO EpreuveIndividuel(IDSport,nomEpreuve,Categorie,IDGagnantOr,IDGagnantArgent,IDGagnantBronze) VALUES
+INSERT INTO EpreuveIndividuel(IDSport, nomEpreuve, Sexe, IDGagnantOr, IDGagnantArgent, IDGagnantBronze) VALUES
   (1, '50 mètres nage libre', 'Femme', 7, 21, 56),
   (1, '100 mètres nage libre', 'Femme', 112, 7, 149),
   (1, '200 metres nage libre', 'Femme', 156, 7, 21),
@@ -598,5 +598,5 @@ INSERT INTO EpreuveIndividuel(IDSport,nomEpreuve,Categorie,IDGagnantOr,IDGagnant
   (17, 'Tournois', 'Homme'),
   (18, 'Tournois', 'Femme'),
   (18, 'Tournois', 'Femme');
-  
+
 */
