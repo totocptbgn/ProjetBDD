@@ -558,7 +558,8 @@ INSERT INTO EpreuveCollective (IDSport, nomEpreuve, Categorie, IDEquipeGagnanteO
   (16, 'Double', 'Homme', 17, 53, 107),
   (19, 'Tournois', 'Femme', 271, 287, 291),
   (19, 'Tournois', 'Homme', 296, 261, 286);
-
+  
+/*
 INSERT INTO EpreuveIndividuel (IDSport,nomEpreuve,Categorie,IDGagnantOr,IDGagnantArgent,IDGagnantBronze) VALUES
     (1,'50 mètres nage libre'),
     (1,'100 mètres nage libre',),
@@ -595,7 +596,4 @@ INSERT INTO EpreuveIndividuel (IDSport,nomEpreuve,Categorie,IDGagnantOr,IDGagnan
     (17,'Tournois'),
     (18,'Tournois'),
     (18,'Tournois');
-=======
--- INSERT INTO EpreuveIndividuel(IDSport, nomEpreuve, Categorie, IDGagnantOr, IDGagnantArgent, IDGagnantBronze) VALUES
--- ();
->>>>>>> 8d11f419ed987653a83f5a72330e052e788dc635
+*/
