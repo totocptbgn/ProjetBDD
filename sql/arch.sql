@@ -93,6 +93,7 @@ CREATE TABLE Particpation (
 	IDMatch int,
 	IDParticipant int,
 	IDStatut text,
+	score text,
 	PRIMARY KEY (IDMatch, IDParticipant),
 	FOREIGN KEY (IDParticipant) REFERENCES Athlete(IDAthlete),
 	FOREIGN KEY (IDParticipant) REFERENCES Equipe(IDEquipe),
