@@ -63,8 +63,9 @@ CREATE TABLE Equipe (
 
 CREATE TABLE EpreuveIndividuel (
 	--
-	-- liste des épreuves individuels avec ID, sport, nom, id des gagnants de chaque médailles et sexe
+	-- liste des épreuves individuels avec ID, sport, nom, id des gagnants de chaque médailles, sexe et type de typeScore
 	-- les id des gagnants correspondent à des athlètes
+	-- typeScore indique si le score se compte en points ou en temps
 	--
 	IDEpreuve serial primary key,
 	IDSport int,
@@ -73,7 +74,9 @@ CREATE TABLE EpreuveIndividuel (
 	IDGagnantArgent int,
 	IDGagnantBronze int,
 	Sexe text not null,
+	typeScore text,
 
+	CHECK (typeScore IN ('Score', 'Temps')),
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport),
 	FOREIGN KEY (IDGagnantOr) REFERENCES Athlete(IDAthlete),
 	FOREIGN KEY (IDGagnantArgent) REFERENCES Athlete(IDAthlete),
@@ -82,8 +85,9 @@ CREATE TABLE EpreuveIndividuel (
 
 CREATE TABLE EpreuveCollective (
 	--
-	-- liste des épreuves collectives avec ID, sport, nom, id des gagnants de chaque médailles et sexe
+	-- liste des épreuves collectives avec ID, sport, nom, id des gagnants de chaque médailles, sexe et type de typeScore
 	-- les id des gagnants correspondent à des équipes
+	-- typeScore indique si le score se compte en points ou en temps
 	--
 	IDEpreuve serial primary key,
 	IDSport int,
@@ -92,7 +96,9 @@ CREATE TABLE EpreuveCollective (
 	IDEquipeGagnanteArgent int,
 	IDEquipeGagnanteBronze int,
 	Sexe text not null,
+	typeScore text,
 
+	CHECK (typeScore IN ('Score', 'Temps')),
 	FOREIGN KEY (IDEquipeGagnanteOr) REFERENCES Equipe(IDequipe),
 	FOREIGN KEY (IDEquipeGagnanteArgent) REFERENCES Equipe(IDequipe),
 	FOREIGN KEY (IDEquipeGagnanteBronze) REFERENCES Equipe(IDequipe),
@@ -133,6 +139,7 @@ CREATE TABLE Particpation (
 	-- liste des participants à un match avec id, athlete/équipe, statut
 	-- fais le lien entre la table Match et les tables Athlete/Equipe
 	-- status détermine si le participant à gagné ou perdu
+	-- score est de type text et contient soir un score, soit un temps
 	--
 	IDMatch int,
 	IDParticipant int,
