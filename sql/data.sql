@@ -646,3 +646,8 @@ INSERT INTO EpreuveIndividuel(IDSport,nomEpreuve,Sexe,IDGagnantOr,IDGagnantArgen
     (17,'Tournois','homme',441,452,445),
     (18,'Tournois','femme',457,460,465),
     (18,'Tournois','Homme',453,458,470);
+
+  /*  INSERT INTO Medaille (IDEpreuve,type,IDGagnant) VALUES
+      (1,'Or',),
+      (1,'Argent',),
+      (1,'Bronze')*/
