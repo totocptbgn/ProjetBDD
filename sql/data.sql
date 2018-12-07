@@ -1,7 +1,6 @@
 
 -- Ce fichier est à utiliser pour remplir les tables crées avec 'arch.sql'.
 
-
 INSERT INTO Sport (type, nomSport) VALUES
   ('Individuel', 'Natation'),
   ('Individuel', 'Equitation'),
@@ -27,6 +26,7 @@ INSERT INTO Athlete (NomAthlete, Pays, IDSport, sexe, age) VALUES
   ('Carlito Neves', 'Portugal', 5, 'Homme', 25),
   ('Zhen Shun', 'Chine', 12, 'Homme', 22),
   ('Tolstaya Valerievna', 'Russie', 5, 'Femme', 19),
+  ('Michael Phelps', 'Etats Unis', 1, 'Homme', 29),
   ('Tsuo Yixing', 'Chine', 11, 'Femme', 35),
   ('Berend Pultz', 'Allemagne', 4, 'Homme', 33),
   ('David Brown', 'Etats Unis', 5, 'Homme', 33),
@@ -530,34 +530,34 @@ INSERT INTO Equipe (Pays, IDSport, sexe) VALUES
   ('Corée Du Sud', 19, 'Femme');
 
 INSERT INTO EpreuveCollective (IDSport, nomEpreuve, Categorie, IDEquipeGagnanteOr, IDEquipeGagnanteArgent, IDEquipeGagnanteBronze) VALUES
-    (4, 'Relais 4*400', 'Femme', 2, 20, 38),
-    (4, 'Relais 4*400', 'Homme', 19, 37, 73),
-    (6, 'Deux de couple', 'Femme', 256, 238, 165),
-    (6, 'Quatre de couple', 'Femme',184, 130, 111),
-    (6, 'Huit', 'Femme', 256, 130, 76),
-    (6, 'Deux avec barreur', 'Femme', 238, 4, 22),
-    (6, 'Deux de couple', 'Homme', 3, 93, 111),
-    (6, 'Quatre de couple', 'Homme', 93, 183, 237),
-    (6, 'Huit', 'Homme', 183, 129, 3),
-    (6, 'Deux avec barreur', 'Homme', 165, 147, 111),
-    (7, 'Double', 'Femme', 186, 168, 96),
-    (7, 'Double', 'Homme', 95, 113, 149),
-    (8, 'Tournois', 'Femme', 116, 134, 152),
-    (8, 'Tournois', 'Homme', 151, 169),
-    (9, 'Tournois', 'Femme', 46, 10, 28),
-    (9, 'Tournois', 'Homme', 81, 99, 117),
-    (15, 'Fleuret par équipe', 'Femme', 16, 88, 124),
-    (15, 'Fleuret par équipe', 'Homme', 123, 15, 87),
-    (15, 'Epee par équipe', 'Femme', 15, 160, 195),
-    (15, 'Epee par equipe', 'Homme', 213, 267, 87),
-    (15, 'Sabre par equipe', 'Femme', 160, 88, 124),
-    (15, 'Sabre par equipe', 'Homme', 213, 15, 87),
-    (13, 'Double', 'Femme', 86, 68, 32),
-    (13, 'Double', 'Homme', 85, 31, 13),
-    (16, 'Double', 'Femme', 18, 54, 72),
-    (16, 'Double', 'Homme', 17, 53, 107)
-    (19, 'Tournois', 'Femme', 271, 287, 291),
-    (19, 'Tournois', 'Homme', 296, 261, 286);
+  (4, 'Relais 4*400', 'Femme', 2, 20, 38),
+  (4, 'Relais 4*400', 'Homme', 19, 37, 73),
+  (6, 'Deux de couple', 'Femme', 256, 238, 165),
+  (6, 'Quatre de couple', 'Femme', 184, 130, 111),
+  (6, 'Huit', 'Femme', 256, 130, 76),
+  (6, 'Deux avec barreur', 'Femme', 238, 4, 22),
+  (6, 'Deux de couple', 'Homme', 3, 93, 111),
+  (6, 'Quatre de couple', 'Homme', 93, 183, 237),
+  (6, 'Huit', 'Homme', 183, 129, 3),
+  (6, 'Deux avec barreur', 'Homme', 165, 147, 111),
+  (7, 'Double', 'Femme', 186, 168, 96),
+  (7, 'Double', 'Homme', 95, 113, 149),
+  (8, 'Tournois', 'Femme', 116, 134, 152),
+  (8, 'Tournois', 'Homme', 151, 169),
+  (9, 'Tournois', 'Femme', 46, 10, 28),
+  (9, 'Tournois', 'Homme', 81, 99, 117),
+  (15, 'Fleuret par équipe', 'Femme', 16, 88, 124),
+  (15, 'Fleuret par équipe', 'Homme', 123, 15, 87),
+  (15, 'Epee par équipe', 'Femme', 15, 160, 195),
+  (15, 'Epee par equipe', 'Homme', 213, 267, 87),
+  (15, 'Sabre par equipe', 'Femme', 160, 88, 124),
+  (15, 'Sabre par equipe', 'Homme', 213, 15, 87),
+  (13, 'Double', 'Femme', 86, 68, 32),
+  (13, 'Double', 'Homme', 85, 31, 13),
+  (16, 'Double', 'Femme', 18, 54, 72),
+  (16, 'Double', 'Homme', 17, 53, 107)
+  (19, 'Tournois', 'Femme', 271, 287, 291),
+  (19, 'Tournois', 'Homme', 296, 261, 286);
 
 -- INSERT INTO EpreuveIndividuel(IDSport, nomEpreuve, Categorie, IDGagnantOr, IDGagnantArgent, IDGagnantBronze) VALUES
 -- ();
