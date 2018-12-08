@@ -118,7 +118,7 @@ CREATE TABLE Match (
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve)
 );
 
-CREATE TABLE Medaille (
+CREATE TABLE MedailleIndividuel (
 	--
 	-- liste les médailles gagnées par un athlète ou une équipe avec id, épreuve, et athlète/équipe
 	-- si une équipe remporte une épreuve c'est l'équipe qui gagne qui obtient la médaille, pas les membres
@@ -129,9 +129,17 @@ CREATE TABLE Medaille (
 	type text not null,
 
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve),
+	FOREIGN KEY (IDGagnant) REFERENCES Athlete(IDAthlete)
+);
+
+CREATE TABLE MedailleCollectif (
+	IDMedaille serial primary key,
+	IDEpreuve int,
+	IDGagnant int,
+	type text not null,
+
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve),
-	FOREIGN KEY (IDGagnant) REFERENCES Athlete(IDAthlete),
-	FOREIGN KEY (IDGagnant) REFERENCES Equipe(IDEquipe)
+	FOREIGN KEY (IDGagnant) REFERENCES Equipe(IDequipe)
 );
 
 CREATE TABLE Particpation (
