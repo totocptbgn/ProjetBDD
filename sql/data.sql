@@ -1049,8 +1049,8 @@ INSERT INTO Equipe (Pays, IDSport, sexe) VALUES
   ('Etats Unis', 19, 'Homme');
 
 INSERT INTO EpreuveCollective (IDSport, nomEpreuve, sexe) VALUES
-  (4, 'relais 4*400', 'Femme'),
-  (4, 'relais 4*400', 'Homme'),
+  (4, 'Relais 4*400', 'Femme'),
+  (4, 'Relais 4*400', 'Homme'),
   (6, 'Deux de couple', 'Femme'),
   (6, 'Quatre de couple', 'Femme'),
   (6, 'Huit', 'Femme'),
@@ -1069,12 +1069,12 @@ INSERT INTO EpreuveCollective (IDSport, nomEpreuve, sexe) VALUES
   (15, 'Fleuret par équipe', 'Homme'),
   (15, 'Epee par équipe', 'Femme'),
   (15, 'Epee par equipe', 'Homme'),
-  (15, 'sabre par equipe', 'Femme'),
-  (15, 'sabre par equipe', 'Homme'),
-  (13, 'double', 'Femme'),
-  (13, 'double', 'Homme'),
-  (16, 'double', 'Femme'),
-  (16, 'double', 'Homme'),
+  (15, 'Sabre par equipe', 'Femme'),
+  (15, 'Sabre par equipe', 'Homme'),
+  (13, 'Double', 'Femme'),
+  (13, 'Double', 'Homme'),
+  (16, 'Double', 'Femme'),
+  (16, 'Double', 'Homme'),
   (19, 'Tournois', 'Femme'),
   (19, 'Tournois', 'Homme');
 
