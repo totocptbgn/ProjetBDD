@@ -1039,3 +1039,7 @@ INSERT INTO MedailleCollectif (type,IDEpreuve,IDGagnant) VALUES
   ('Bronze',28,286);
 
 -- INSERT INTO Participation (IDMatch,IDParticipant,statut,score) VALUES
+
+-- INSERT INTO Membres (IDAthlete,IDequipe) VALUES
+-- (25,103),
+-- (184,103),
