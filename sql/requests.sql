@@ -18,19 +18,12 @@
 
 -- 1. La liste des athlètes italiens ayant obtenu une médaille
 SELECT NomAthlete
-FROM Athlete, Medaille
-WHERE Athlete.IDAthlete = Medaille.IDGagnant
+FROM Athlete, MedailleIndividuel
+WHERE Athlete.IDAthlete = MedailleIndividuel.IDGagnant
 AND Athlete.Pays = 'Italie';
 
 -- 2. Le nom et la nationalité des médaillés du 100m, 200m, et 400m avec à chaque fois le type de médaille (or, argent, bronze)
-SELECT NomAthlete, Pays, type
-FROM Medaille, Athlete, EpreuveIndividuel
-WHERE Athlete.IDAthlete = Medaille.IDGagnant
-AND Medaille.IDEpreuve = EpreuveIndividuel.IDEpreuve
-AND (EpreuveIndividuel.nomEpreuve = '100m'
-  OR EpreuveIndividuel.nomEpreuve = '200m'
-  OR EpreuveIndividuel.nomEpreuve = '400m'
-);
+
 
 -- 3. Les membres de l'équipe féminine de handball de moins de 25 ans
 -- 4. Les médailles gagnées par Michael Phelps, avec l'épreuve et le temps correspondants
