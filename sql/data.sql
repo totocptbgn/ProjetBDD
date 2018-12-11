@@ -846,3 +846,5 @@ INSERT INTO MedailleCollectif (type,IDEpreuve,IDGagnant) VALUES
 ('Or',28,296),
 ('Argent',28,261),
 ('Bronze',28,286);
+
+INSERT INTO Participation (IDMatch,IDParticipant,statut,score) VALUES
