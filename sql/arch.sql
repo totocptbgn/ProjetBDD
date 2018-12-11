@@ -109,8 +109,7 @@ CREATE TABLE Match (
 
 CREATE TABLE MedailleIndividuel (
 	--
-	-- liste les médailles gagnées par un athlète ou une équipe avec id, épreuve, et athlète/équipe
-	-- si une équipe remporte une épreuve c'est l'équipe qui gagne qui obtient la médaille, pas les membres
+	-- liste les médailles gagnées par un athlète avec id, épreuve, et athlète/équipe
 	--
 	IDMedaille serial primary key,
 	IDEpreuve int,
@@ -122,6 +121,10 @@ CREATE TABLE MedailleIndividuel (
 );
 
 CREATE TABLE MedailleCollectif (
+	--
+	-- liste les médailles gagnées par une équipe avec id, épreuve, et athlète/équipe
+	-- si une équipe remporte une épreuve c'est l'équipe qui gagne qui obtient la médaille, pas les membres
+	--
 	IDMedaille serial primary key,
 	IDEpreuve int,
 	IDGagnant int,
