@@ -315,7 +315,7 @@ INSERT INTO Athlete (NomAthlete, Pays, IDSport, sexe, age) VALUES
   ('Hugo Quint', 'France', 11, 'Homme', 18),
   ('Kieran Mills', 'Royaume Uni', 9, 'Homme', 25),
   ('Esterina Prestia', 'Italie', 9, 'Femme', 26),
-  ('Archie Scott', 'Royaume Uni', 0, 'Homme', 25),
+  ('Archie Scott', 'Royaume Uni', 19, 'Homme', 25),
   ('Emilio Moruga', 'Espagne', 13, 'Homme', 24),
   ('Diane Thiers', 'France', 5, 'Femme', 26),
   ('Lídia Seabra', 'Portugal', 5, 'Homme', 31),
@@ -323,7 +323,7 @@ INSERT INTO Athlete (NomAthlete, Pays, IDSport, sexe, age) VALUES
   ('Kendell Prince', 'Jamaique', 3, 'Homme', 35),
   ('Tian Zheng', 'Chine', 9, 'Femme', 30),
   ('Dina Campos', 'Portugal', 3, 'Homme', 24),
-  ('Erica Kornberg', 'Allemagne', 0, 'Femme', 18),
+  ('Erica Kornberg', 'Allemagne', 8, 'Femme', 18),
   ('Hae Sun-Mi', 'Corée Du Sud', 8, 'Femme', 25),
   ('Cha Kyung-Mo', 'Corée Du Sud', 2, 'Homme', 25),
   ('Wilburn Anderson', 'Jamaique', 1, 'Homme', 34),
@@ -1040,6 +1040,5 @@ INSERT INTO MedailleCollectif (type,IDEpreuve,IDGagnant) VALUES
 
 -- INSERT INTO Participation (IDMatch,IDParticipant,statut,score) VALUES
 
--- INSERT INTO Membres (IDAthlete,IDequipe) VALUES
--- (25,103),
--- (184,103),
+ --INSERT INTO Membres (IDAthlete,IDequipe) VALUES
+  --(37,)
