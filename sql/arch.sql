@@ -70,17 +70,11 @@ CREATE TABLE EpreuveIndividuel (
 	IDEpreuve serial primary key,
 	IDSport int,
 	nomEpreuve text not null,
-	IDGagnantOr int,
-	IDGagnantArgent int,
-	IDGagnantBronze int,
 	Sexe text not null,
 	typeScore text,
 
 	CHECK (typeScore IN ('Score', 'Temps')),
-	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport),
-	FOREIGN KEY (IDGagnantOr) REFERENCES Athlete(IDAthlete),
-	FOREIGN KEY (IDGagnantArgent) REFERENCES Athlete(IDAthlete),
-	FOREIGN KEY (IDGagnantBronze) REFERENCES Athlete(IDAthlete)
+	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
 
 CREATE TABLE EpreuveCollective (
@@ -92,16 +86,11 @@ CREATE TABLE EpreuveCollective (
 	IDEpreuve serial primary key,
 	IDSport int,
 	nomEpreuve text not null,
-	IDEquipeGagnanteOr int,
-	IDEquipeGagnanteArgent int,
-	IDEquipeGagnanteBronze int,
 	Sexe text not null,
 	typeScore text,
 
 	CHECK (typeScore IN ('Score', 'Temps')),
-	FOREIGN KEY (IDEquipeGagnanteOr) REFERENCES Equipe(IDequipe),
-	FOREIGN KEY (IDEquipeGagnanteArgent) REFERENCES Equipe(IDequipe),
-	FOREIGN KEY (IDEquipeGagnanteBronze) REFERENCES Equipe(IDequipe),
+
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
 
