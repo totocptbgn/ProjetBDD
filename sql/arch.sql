@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS Sport CASCADE;
 DROP TABLE IF EXISTS EpreuveIndividuel CASCADE;
 DROP TABLE IF EXISTS EpreuveCollective CASCADE;
 DROP TABLE IF EXISTS Match CASCADE;
-DROP TABLE IF EXISTS Particpation CASCADE;
+DROP TABLE IF EXISTS Participation CASCADE;
 DROP TABLE IF EXISTS Membres CASCADE;
 DROP TABLE IF EXISTS MedailleCollectif CASCADE;
 DROP TABLE IF EXISTS MedailleIndividuel CASCADE;
@@ -131,7 +131,7 @@ CREATE TABLE MedailleCollectif (
 	FOREIGN KEY (IDGagnant) REFERENCES Equipe(IDequipe)
 );
 
-CREATE TABLE Particpation (
+CREATE TABLE Participation (
 	--
 	-- liste des participants à un match avec id, athlete/équipe, statut
 	-- fais le lien entre la table Match et les tables Athlete/Equipe
