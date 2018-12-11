@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS Participation CASCADE;
 DROP TABLE IF EXISTS Membres CASCADE;
 DROP TABLE IF EXISTS MedailleCollectif CASCADE;
 DROP TABLE IF EXISTS MedailleIndividuel CASCADE;
+
 -- Création des tables
 --
 
