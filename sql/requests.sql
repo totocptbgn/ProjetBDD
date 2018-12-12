@@ -62,10 +62,8 @@ AND IDAthlete IN (
   )
 );
 
-\echo '4. Les médailles gagnées par Michael Phelps, avec l\'épreuve et le temps correspondants :'
-
-\echo
--- /!\ Remplir les médailles remportées par MP et remplir les medailles avec l'id de participation
+-- 4. Les médailles gagnées par Michael Phelps, avec l\'épreuve et le temps correspondants
+  -- /!\ Remplir les médailles remportées par MP et remplir les medailles avec l'id de participation
 
 \echo '5. La liste des sports pratiqués en équipe'
 
@@ -90,10 +88,55 @@ WHERE IDMatch IN (
 -- Dificulté II --
 
 -- 1. La moyenne des temps réalisés au 200 mètres nage libre par nationalité
--- 2. Le nombre de médailles par pays représentés (rappel : une seule médaille est comptée pour une équipe)
+
+\echo '2. Le nombre de médailles par pays représentés (rappel : une seule médaille est comptée pour une équipe)'
+
+SELECT COUNT(MedailleIndividuel.IDMedaille) AS NbrMedaille, Athlete.Pays
+FROM MedailleIndividuel, Athlete
+WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
+GROUP BY Athlete.Pays
+ORDER BY NbrMedaille DESC);
+
+SELECT COUNT(MedailleCollectif.IDMedaille) AS NbrMedaille, Equipe.Pays
+FROM MedailleCollectif, Equipe
+WHERE MedailleCollectif.IDGagnant = Equipe.IDequipe
+GROUP BY Equipe.Pays
+ORDER BY NbrMedaille DESC);
+
+/*
+SELECT MedailleIndividuel.IDMedaille, Athlete.Pays
+FROM MedailleIndividuel
+WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
+UNION
+SELECT MedailleCollectif.IDMedaille, Equipe.Pays
+FROM MedailleCollectif, Equipe
+WHERE MedailleCollectif.IDGagnant = Equipe.IDequipe;
+*/
+
+
 -- 3. Pour chaque épreuve, le nom et la nationalité de l'athlète ayant obtenu la médaille d'or, ainsi que le nom et la nationalité de celui ayant obtenu la médaille d'argent (tableau résultat avec 5 attributs)
--- 4. Les athlètes qui n'ont obtenu aucune médaille d'or
--- 5. Les sports individuels dans lesquels la France n'a pas obtenu de médaille
+
+\echo '4. Les athlètes qui n\'ont obtenu aucune médaille d\'or'
+
+SELECT *
+FROM Athlete
+WHERE IDAthlete NOT IN (
+  SELECT IDGagnant
+  FROM MedailleIndividuel
+  WHERE type = 'Or'
+);
+
+
+\echo '5. Les sports individuels dans lesquels la France n\'a pas obtenu de médaille'
+
+/*
+SELECT nomSport
+FROM SPORT
+WHERE type = 'Individuel'
+AND IDSport NOT IN (
+);
+/*
+
 -- 6. Les coureurs qui n'ont jamais mis plus de dix secondes au 100m Implémentez ensuite au minimum 4 requêtes au choix parmi les 6 suivantes :
 
 -- Dificulté III --
