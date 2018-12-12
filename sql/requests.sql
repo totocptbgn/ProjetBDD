@@ -11,18 +11,33 @@
     SELECT * FROM Medaille;
     SELECT * FROM Particpation;
     SELECT * FROM Membres;
-
 */
+
+-- Clear la console
+--
+\! clear
+
+-- Requêtes :
+--
 
 -- Dificulté I --
 
--- 1. La liste des athlètes italiens ayant obtenu une médaille
+\echo '1. La liste des athlètes italiens ayant obtenu une médaille :'
+
 SELECT NomAthlete
 FROM Athlete, MedailleIndividuel
 WHERE Athlete.IDAthlete = MedailleIndividuel.IDGagnant
 AND Athlete.Pays = 'Italie';
 
--- 2. Le nom et la nationalité des médaillés du 100m, 200m, et 400m avec à chaque fois le type de médaille (or, argent, bronze)
+\echo '2. Le nom et la nationalité des médaillés du 100m, 200m, et 400m avec à chaque fois le type de médaille (or, argent, bronze) :'
+
+SELECT Athlete.NomAthlete, Athlete.Pays, MedailleIndividuel.type
+FROM Athlete, MedailleIndividuel
+WHERE Athlete.IDAthlete = MedailleIndividuel.IDGagnant
+AND IDEpreuve IN (SELECT IDEpreuve FROM EpreuveIndividuel WHERE nomEpreuve = '100m' OR nomEpreuve = '200m' OR nomEpreuve = '400m');
+
+
+
 
 
 -- 3. Les membres de l'équipe féminine de handball de moins de 25 ans

@@ -6,6 +6,10 @@
 --
 SET client_min_messages TO WARNING;
 
+-- Clear la console
+--
+\! clear
+
 -- On supprime les tables si elles existent déjà
 --
 DROP TABLE IF EXISTS Athlete CASCADE;

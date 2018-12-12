@@ -1,6 +1,12 @@
 
 -- Ce fichier est à utiliser pour remplir les tables crées avec 'arch.sql'.
 
+-- Efface les anciennes données et reconstruit la BDD
+\i arch.sql
+
+-- Clear la console
+\! clear
+
 INSERT INTO Sport (type, nomSport) VALUES
   ('Individuel', 'Natation'),
   ('Individuel', 'Equitation'),
@@ -1113,7 +1119,13 @@ INSERT INTO EpreuveIndividuel(IDSport, nomEpreuve, Sexe) VALUES
   (17, 'Tournois', 'Femme'),
   (17, 'Tournois', 'Homme'),
   (18, 'Tournois', 'Femme'),
-  (18, 'Tournois', 'Homme');
+  (18, 'Tournois', 'Homme'),
+  (3, '100m', 'Homme'),
+  (3, '100m', 'Femme'),
+  (3, '200m', 'Homme'),
+  (3, '200m', 'Femme'),
+  (3, '400m', 'Homme'),
+  (3, '400m', 'Femme');
 
 INSERT INTO MedailleIndividuel (type,  IDEpreuve,  IDGagnant) VALUES
   ('Or', 1, 7),
@@ -1493,5 +1505,5 @@ INSERT INTO MedailleCollectif (type, IDEpreuve, IDGagnant) VALUES
   (87,260),
   (302,260),
   (569,260),
-  (570,259),
--- idsport = 8  
+  (570,259);
+-- idsport = 8
