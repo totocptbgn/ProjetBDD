@@ -742,7 +742,8 @@ INSERT INTO Athlete (NomAthlete, Pays, IDSport, sexe, age) VALUES
   ('', 'Canada', 16, 'Femme', 35),
   ('', 'Canada', 16, 'Homme', 28),
   ('', 'Corée Du Sud', 16, 'Femme', 29),
-  ('', 'Corée Du Sud', 16, 'Homme', 32);
+  ('', 'Corée Du Sud', 16, 'Homme', 32),
+  ('Michael Phelps','Etats Unis',1,'Homme',32);
 
 INSERT INTO Equipe (Pays, IDSport, sexe) VALUES
   ('Etats Unis', 4, 'Homme'),
@@ -1128,13 +1129,13 @@ INSERT INTO MedailleIndividuel (type,  IDEpreuve,  IDGagnant) VALUES
   ('Or', 4, 56),
   ('Argent', 4, 149),
   ('Bronze', 4, 7),
-  ('Or', 5, 203),
+  ('Or', 5,721 ),
   ('Argent', 5, 157),
   ('Bronze', 5, 98),
-  ('Or', 6, 203),
+  ('Or', 6, 721),
   ('Argent', 6, 52),
   ('Bronze', 6, 44),
-  ('Or', 7, 52),
+  ('Or', 7, 721),
   ('Argent', 7, 174),
   ('Bronze', 7, 83),
   ('Or', 8, 158),
