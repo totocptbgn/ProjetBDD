@@ -24,26 +24,68 @@
 
 \echo '1. La liste des athlètes italiens ayant obtenu une médaille :'
 
-SELECT NomAthlete
+SELECT DISTINCT NomAthlete AS Athlete
 FROM Athlete, MedailleIndividuel
 WHERE Athlete.IDAthlete = MedailleIndividuel.IDGagnant
 AND Athlete.Pays = 'Italie';
 
 \echo '2. Le nom et la nationalité des médaillés du 100m, 200m, et 400m avec à chaque fois le type de médaille (or, argent, bronze) :'
 
-SELECT Athlete.NomAthlete, Athlete.Pays, MedailleIndividuel.type
+SELECT Athlete.NomAthlete AS Nom, Athlete.Pays, MedailleIndividuel.type
 FROM Athlete, MedailleIndividuel
 WHERE Athlete.IDAthlete = MedailleIndividuel.IDGagnant
-AND IDEpreuve IN (SELECT IDEpreuve FROM EpreuveIndividuel WHERE nomEpreuve = '100m' OR nomEpreuve = '200m' OR nomEpreuve = '400m');
+AND IDEpreuve IN (
+  SELECT IDEpreuve
+  FROM EpreuveIndividuel
+  WHERE nomEpreuve = '100m'
+  OR nomEpreuve = '200m'
+  OR nomEpreuve = '400m'
+);
 
+\echo '3. Les membres de l\'équipe féminine de handball de moins de 25 ans :'
 
+SELECT NomAthlete AS Athlete
+FROM Athlete
+WHERE Age < 25
+AND IDAthlete IN (
+  SELECT IDAthlete
+  FROM Membres
+  WHERE IDEquipe IN (
+    SELECT IDEquipe
+    FROM Equipe
+    WHERE sexe = 'Femme'
+    AND IDSport IN (
+      SELECT IDSport
+      FROM Sport
+      WHERE nomSport = 'Handball'
+    )
+  )
+);
 
+\echo '4. Les médailles gagnées par Michael Phelps, avec l\'épreuve et le temps correspondants :'
 
+\echo
+-- /!\ Remplir les médailles remportées par MP et remplir les medailles avec l'id de participation
 
--- 3. Les membres de l'équipe féminine de handball de moins de 25 ans
--- 4. Les médailles gagnées par Michael Phelps, avec l'épreuve et le temps correspondants
--- 5. La liste des sports pratiqués en équipe
--- 6. Le meilleur temps réalisé au marathon
+\echo '5. La liste des sports pratiqués en équipe'
+
+SELECT nomSport AS Sport
+FROM Sport
+WHERE type = 'Collectif';
+
+\echo '6. Le meilleur temps réalisé au marathon'
+
+SELECT Score
+FROM Particpation
+WHERE IDMatch IN (
+  SELECT IDMatch
+  FROM Match
+  WHERE IDEpreuve IN (
+    SELECT IDEpreuve
+    FROM EpreuveIndividuel
+    WHERE nomEpreuve = 'Marathon'
+  )
+);
 
 -- Dificulté II --
 
