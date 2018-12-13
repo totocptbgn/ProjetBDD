@@ -1922,7 +1922,7 @@ INSERT INTO ParticipationIndividuelle (IDMatch,IDParticipant,statut,score) VALUE
   (3,24,'Défaite','00:00:58'),
   (8,44,'Victoire','00:00:42'),
   (8,52,'Victoire','00:00:44'),
-  (8,83'Victoire','00:00:46'),
+  (8,83,'Victoire','00:00:46'),
   (8,155,'Défaite','00:00:50'),
   (8,158,'Défaite','00:00:52'),
   (8,174,'Défaite','00:00:54'),
