@@ -91,6 +91,7 @@ CREATE TABLE EpreuveCollective (
 	typeScore text,
 
 	CHECK (typeScore IN ('Score', 'Temps')),
+
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
 
@@ -98,32 +99,13 @@ CREATE TABLE Match (
 	--
 	-- liste des matchs avec nom, id, date, et épreuve
 	--
-	IDMatch serial primary key,
 	NomMatch text,
+	IDMatch serial primary key,
 	dateMatch date NOT NULL,
 	IDEpreuve int,
 
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve),
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve)
-);
-
-CREATE TABLE Participation (
-	--
-	-- liste des participants à un match avec id, athlete/équipe, statut
-	-- fais le lien entre la table Match et les tables Athlete/Equipe
-	-- status détermine si le participant à gagné ou perdu
-	-- score est de type text et contient soir un score, soit un temps
-	--
-	IDParticipation serial primary key,
-	IDMatch int,
-	IDParticipant int,
-	statut text,
-	score text,
-
-	CHECK (statut IN ('Victoire', 'Défaite')),
-	FOREIGN KEY (IDParticipant) REFERENCES Athlete(IDAthlete),
-	FOREIGN KEY (IDParticipant) REFERENCES Equipe(IDEquipe),
-	FOREIGN KEY (IDMatch) REFERENCES Match(IDMatch)
 );
 
 CREATE TABLE MedailleIndividuel (
@@ -133,13 +115,10 @@ CREATE TABLE MedailleIndividuel (
 	IDMedaille serial primary key,
 	IDEpreuve int,
 	IDGagnant int,
-	IDParticipation int,
 	type text not null,
 
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve),
-	FOREIGN KEY (IDGagnant) REFERENCES Athlete(IDAthlete),
-	FOREIGN KEY (IDParticipation) REFERENCES Participation(IDParticipation)
-
+	FOREIGN KEY (IDGagnant) REFERENCES Athlete(IDAthlete)
 );
 
 CREATE TABLE MedailleCollectif (
@@ -150,12 +129,41 @@ CREATE TABLE MedailleCollectif (
 	IDMedaille serial primary key,
 	IDEpreuve int,
 	IDGagnant int,
-	IDParticipation int,
 	type text not null,
 
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve),
-	FOREIGN KEY (IDGagnant) REFERENCES Equipe(IDequipe),
-	FOREIGN KEY (IDParticipation) REFERENCES Participation(IDParticipation)
+	FOREIGN KEY (IDGagnant) REFERENCES Equipe(IDequipe)
+);
+
+CREATE TABLE ParticipationCollectif (
+	--
+	-- liste des participants à un match avec id, athlete/équipe, statut
+	-- fais le lien entre la table Match et les tables Athlete/Equipe
+	-- status détermine si le participant à gagné ou perdu
+	-- score est de type text et contient soir un score, soit un temps
+	--
+	IDMatch int,
+	IDParticipant int,
+	statut text,
+	score text,
+
+	CHECK (statut IN ('Victoire', 'Défaite')),
+	PRIMARY KEY (IDMatch, IDParticipant),
+	FOREIGN KEY (IDParticipant) REFERENCES Equipe(IDEquipe),
+	FOREIGN KEY (IDMatch) REFERENCES MatchCollectif(IDMatch)
+);
+
+CREATE TABLE ParticpationIndividuelle (
+	IDMatch int,
+	IDParticipant int,
+	statut text,
+	score text,
+
+	CHECK (statut IN ('Victoire', 'Défaite')),
+	PRIMARY KEY (IDMatch, IDParticipant),
+	FOREIGN KEY (IDParticipant) REFERENCES Athlete(IDAthlete),
+	FOREIGN KEY (IDMatch) REFERENCES MatchIndividuel(IDMatch)
+
 );
 
 CREATE TABLE Membres (
