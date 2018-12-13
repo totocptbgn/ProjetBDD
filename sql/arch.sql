@@ -6,6 +6,10 @@
 --
 SET client_min_messages TO WARNING;
 
+-- Clear la console
+--
+\! clear
+
 -- On supprime les tables si elles existent déjà
 --
 DROP TABLE IF EXISTS Athlete CASCADE;
@@ -18,7 +22,7 @@ DROP TABLE IF EXISTS ParticipationCollectif CASCADE;
 DROP TABLE IF EXISTS Membres CASCADE;
 DROP TABLE IF EXISTS MedailleCollectif CASCADE;
 DROP TABLE IF EXISTS MedailleIndividuel CASCADE;
-DROP TABLE IF EXISTS ParticipationIndividuel CASCADE;
+DROP TABLE IF EXISTS ParticipationIndividuelle CASCADE;
 DROP TABLE IF EXISTS MatchCollectif CASCADE;
 
 -- Création des tables
@@ -167,7 +171,7 @@ CREATE TABLE ParticipationCollectif (
 	FOREIGN KEY (IDMatch) REFERENCES MatchCollectif(IDMatch)
 );
 
-CREATE TABLE ParticpationIndividuelle (
+CREATE TABLE ParticipationIndividuelle (
 	IDMatch int,
 	IDParticipant int,
 	statut text,
