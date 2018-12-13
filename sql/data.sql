@@ -1561,3 +1561,17 @@ INSERT INTO MedailleCollectif (type, IDEpreuve, IDGagnant) VALUES
   (137,190),
   (291,)*/
   INSERT INTO Membres (IDAthlete,IDequipe) SELECT IDAthlete,idequipe FROM Athlete,Equipe WHERE Athlete.sexe = Equipe.sexe AND Athlete.pays = Equipe.pays AND Athlete.IDSport = Equipe.IDSport;
+
+
+  INSERT INTO MatchCollectif (NomMatch,IDEpreuve,dateMatch) VALUES
+    ('relais 4*400',1,'2016-08-05'),
+    ('relais 4*400',2,'2016-08-05'),
+    ('Deux de couple',3,'2016-08-05'),
+    ('Quatre de couple',4,'2016-08-06'),
+    ('Huit',5,'2016-08-07'),
+    ('Deux avec barreur',6,'2016-08-08'),
+    ('Deux de couple',7,'2016-08-05'),
+    ('Quatre de couple',8,'2016-08-07'),
+    ('Huit',9,'2016-08-08'),
+    ('Deux avec barreur',10,'2016-08-09'),
+    ('double',11,'2016-08-06');
