@@ -75,10 +75,10 @@ WHERE type = 'Collectif';
 \echo '6. Le meilleur temps réalisé au marathon'
 
 SELECT Score
-FROM Particpation
+FROM ParticipationIndividuelle
 WHERE IDMatch IN (
   SELECT IDMatch
-  FROM Match
+  FROM MatchIndividuel
   WHERE IDEpreuve IN (
     SELECT IDEpreuve
     FROM EpreuveIndividuel
