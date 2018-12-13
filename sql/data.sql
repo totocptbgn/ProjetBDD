@@ -1566,8 +1566,6 @@ INSERT INTO MedailleCollectif (type, IDEpreuve, IDGagnant) VALUES
   (594,207),
   (137,190),
   (291,)*/
-<<<<<<< HEAD
-  INSERT INTO Membres (IDAthlete,IDequipe) SELECT IDAthlete,idequipe FROM Athlete,Equipe WHERE Athlete.sexe = Equipe.sexe AND Athlete.pays = Equipe.pays AND Athlete.IDSport = Equipe.IDSport;
 
 
   INSERT INTO MatchCollectif (NomMatch,IDEpreuve,dateMatch) VALUES
@@ -1582,7 +1580,6 @@ INSERT INTO MedailleCollectif (type, IDEpreuve, IDGagnant) VALUES
     ('Huit',9,'2016-08-08'),
     ('Deux avec barreur',10,'2016-08-09'),
     ('double',11,'2016-08-06');
-=======
 
   INSERT INTO Membres (IDAthlete,IDequipe)
     SELECT IDAthlete,idequipe
@@ -1590,4 +1587,3 @@ INSERT INTO MedailleCollectif (type, IDEpreuve, IDGagnant) VALUES
     WHERE Athlete.sexe = Equipe.sexe
     AND Athlete.pays = Equipe.pays
     AND Athlete.IDSport = Equipe.IDSport;
->>>>>>> b8c45cba864a2f2ca88a2906441835f555539acd
