@@ -30,6 +30,7 @@ WHERE Athlete.IDAthlete = MedailleIndividuel.IDGagnant
 AND Athlete.Pays = 'Italie';
 
 \echo '2. Le nom et la nationalité des médaillés du 100m, 200m, et 400m avec à chaque fois le type de médaille (or, argent, bronze) :'
+  -- Aucun résultat
 
 SELECT Athlete.NomAthlete AS Nom, Athlete.Pays, MedailleIndividuel.type
 FROM Athlete, MedailleIndividuel
@@ -43,7 +44,7 @@ AND IDEpreuve IN (
 );
 
 \echo '3. Les membres de l\'équipe féminine de handball de moins de 25 ans :'
-
+  -- Aucun résultat...
 SELECT NomAthlete AS Athlete
 FROM Athlete
 WHERE Age < 25
@@ -90,29 +91,13 @@ WHERE IDMatch IN (
 -- 1. La moyenne des temps réalisés au 200 mètres nage libre par nationalité
 
 \echo '2. Le nombre de médailles par pays représentés (rappel : une seule médaille est comptée pour une équipe)'
+  -- Ne fais que les sports collectifs ou les sport individuels (pas les deux en même temps)
 
 SELECT COUNT(MedailleIndividuel.IDMedaille) AS NbrMedaille, Athlete.Pays
 FROM MedailleIndividuel, Athlete
 WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
 GROUP BY Athlete.Pays
-ORDER BY NbrMedaille DESC);
-
-SELECT COUNT(MedailleCollectif.IDMedaille) AS NbrMedaille, Equipe.Pays
-FROM MedailleCollectif, Equipe
-WHERE MedailleCollectif.IDGagnant = Equipe.IDequipe
-GROUP BY Equipe.Pays
-ORDER BY NbrMedaille DESC);
-
-/*
-SELECT MedailleIndividuel.IDMedaille, Athlete.Pays
-FROM MedailleIndividuel
-WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
-UNION
-SELECT MedailleCollectif.IDMedaille, Equipe.Pays
-FROM MedailleCollectif, Equipe
-WHERE MedailleCollectif.IDGagnant = Equipe.IDequipe;
-*/
-
+ORDER BY NbrMedaille DESC;
 
 -- 3. Pour chaque épreuve, le nom et la nationalité de l'athlète ayant obtenu la médaille d'or, ainsi que le nom et la nationalité de celui ayant obtenu la médaille d'argent (tableau résultat avec 5 attributs)
 
@@ -126,7 +111,6 @@ WHERE IDAthlete NOT IN (
   WHERE type = 'Or'
 );
 
-
 \echo '5. Les sports individuels dans lesquels la France n\'a pas obtenu de médaille'
 
 /*
@@ -135,7 +119,6 @@ FROM SPORT
 WHERE type = 'Individuel'
 AND IDSport NOT IN (
 );
-/*
 
 -- 6. Les coureurs qui n'ont jamais mis plus de dix secondes au 100m Implémentez ensuite au minimum 4 requêtes au choix parmi les 6 suivantes :
 
@@ -147,3 +130,4 @@ AND IDSport NOT IN (
 -- 4. Le pourcentage de médailles remportées par des femmes (y compris en équipe)
 -- 5. Le nombre total de points marqués par l'équipe féminine de handball qui a marqué plus de points que chaque équipe masculine de handball tout au long des jeux
 -- 6. Les pays qui ont obtenu plus de médailles que la France dans chaque sport
+*/
