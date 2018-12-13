@@ -1120,7 +1120,15 @@ INSERT INTO EpreuveIndividuel(IDSport, nomEpreuve, Sexe) VALUES
   (17, 'Tournois', 'Femme'),
   (17, 'Tournois', 'Homme'),
   (18, 'Tournois', 'Femme'),
-  (18, 'Tournois', 'Homme');
+  (18, 'Tournois', 'Homme'),
+  (3,'100m','Femme'),
+  (3,'200m','Femme'),
+  (3,'400m','Femme'),
+  (3,'100m','Homme'),
+  (3,'200m','Homme'),
+  (3,'400m','Homme'),
+  (3,'Marathon','Homme'),
+  (3,'Marathon','Femme');
 
 INSERT INTO MedailleIndividuel (type,  IDEpreuve,  IDGagnant) VALUES
   ('Or', 1, 7),
@@ -1635,7 +1643,7 @@ INSERT INTO MedailleCollectif (type, IDEpreuve, IDGagnant) VALUES
     ('Final',28,2016-08-16);
 
     INSERT INTO MatchIndividuel (NomMatch,IDEpreuve,dateMatch) VALUES
-
+      
 
 
   INSERT INTO Membres (IDAthlete,IDequipe)
