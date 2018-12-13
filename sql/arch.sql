@@ -13,11 +13,13 @@ DROP TABLE IF EXISTS Equipe CASCADE;
 DROP TABLE IF EXISTS Sport CASCADE;
 DROP TABLE IF EXISTS EpreuveIndividuel CASCADE;
 DROP TABLE IF EXISTS EpreuveCollective CASCADE;
-DROP TABLE IF EXISTS Match CASCADE;
-DROP TABLE IF EXISTS Participation CASCADE;
+DROP TABLE IF EXISTS MatchIndividuel CASCADE;
+DROP TABLE IF EXISTS ParticipationCollectif CASCADE;
 DROP TABLE IF EXISTS Membres CASCADE;
 DROP TABLE IF EXISTS MedailleCollectif CASCADE;
 DROP TABLE IF EXISTS MedailleIndividuel CASCADE;
+DROP TABLE IF EXISTS ParticipationIndividuel CASCADE;
+DROP TABLE IF EXISTS MatchCollectif CASCADE;
 
 -- Création des tables
 --
@@ -95,7 +97,7 @@ CREATE TABLE EpreuveCollective (
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
 
-CREATE TABLE Match (
+CREATE TABLE MatchIndividuel (
 	--
 	-- liste des matchs avec nom, id, date, et épreuve
 	--
@@ -104,9 +106,21 @@ CREATE TABLE Match (
 	dateMatch date NOT NULL,
 	IDEpreuve int,
 
-	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve),
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve)
+);
+
+CREATE TABLE MatchCollectif (
+	--
+	-- liste des matchs avec nom, id, date, et épreuve
+	--
+	NomMatch text,
+	IDMatch serial primary key,
+	dateMatch date NOT NULL,
+	IDEpreuve int,
+
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve)
 );
+
 
 CREATE TABLE MedailleIndividuel (
 	--
