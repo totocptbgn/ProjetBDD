@@ -1,5 +1,11 @@
 
--- Ce fichier est à utiliser pour remplir les tables crées avec 'arch.sql'.
+-- Ce fichier est à utiliser pour remplir les tables
+
+-- Création et Nettoyage des tables
+--
+\i arch.sql
+
+
 
 INSERT INTO Sport (type, nomSport) VALUES
   ('Individuel', 'Natation'),
@@ -1560,4 +1566,10 @@ INSERT INTO MedailleCollectif (type, IDEpreuve, IDGagnant) VALUES
   (594,207),
   (137,190),
   (291,)*/
-  INSERT INTO Membres (IDAthlete,IDequipe) SELECT IDAthlete,idequipe FROM Athlete,Equipe WHERE Athlete.sexe = Equipe.sexe AND Athlete.pays = Equipe.pays AND Athlete.IDSport = Equipe.IDSport;
+
+  INSERT INTO Membres (IDAthlete,IDequipe)
+    SELECT IDAthlete,idequipe
+    FROM Athlete,Equipe
+    WHERE Athlete.sexe = Equipe.sexe
+    AND Athlete.pays = Equipe.pays
+    AND Athlete.IDSport = Equipe.IDSport;
