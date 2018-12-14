@@ -118,15 +118,18 @@ FROM SPORT
 WHERE type = 'Individuel'
 AND IDSport NOT IN (
 );
+*/
 
 -- 6. Les coureurs qui n'ont jamais mis plus de dix secondes au 100m Implémentez ensuite au minimum 4 requêtes au choix parmi les 6 suivantes :
 
--- Dificulté III --
-
+\echo '----------------- Dificulté III -----------------'
+\echo
 -- 1. L'athlète qui a concouru sept jours consécutifs et a gagné à chaque fois
 -- 2. Les pays qui ont eu une médaille dans chaque catégorie sportive (pas forcément à toutes les épreuves de cette catégorie)
--- 3. Les cinq catégories sportives pour lesquelles il y a le moins d'épreuves
+
+\echo '3. Les cinq catégories sportives pour lesquelles il y a le moins d\'épreuves'
+
+
 -- 4. Le pourcentage de médailles remportées par des femmes (y compris en équipe)
 -- 5. Le nombre total de points marqués par l'équipe féminine de handball qui a marqué plus de points que chaque équipe masculine de handball tout au long des jeux
 -- 6. Les pays qui ont obtenu plus de médailles que la France dans chaque sport
-*/
