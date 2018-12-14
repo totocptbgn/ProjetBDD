@@ -114,7 +114,7 @@ ORDER BY NbrMedaille DESC;
 \echo '   celui ayant obtenu la médaille d\'argent (tableau résultat avec 5 attributs)'
 
 \echo
-\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo '   /!\\ À REFAIRE /!\\'
 \echo
 
   /*
@@ -167,8 +167,19 @@ WHERE Sport.IDSport IN (
 \echo '6. Les coureurs qui n\'ont jamais mis plus de dix secondes au 100m :'
 
 \echo
-\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo '   /!\\ À FINIR /!\\'
 \echo
+
+  /*
+  SELECT nomAthlete AS Athlete
+  FROM Athlete
+  WHERE IDAthlete IN (
+    -- Athlètes faisant du 100m
+  )
+  AND IDAthlete NOT IN (
+    -- Athlètes ayant fait plus de 10s au 100m
+  );
+  */
 
 \echo '---------------------------------- Dificulté III ----------------------------------'
 \echo
