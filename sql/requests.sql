@@ -96,19 +96,25 @@ FROM Medailles
 GROUP BY Pays
 ORDER BY NbrMedaille DESC;
 
--- 3. Pour chaque épreuve, le nom et la nationalité de l'athlète ayant obtenu la médaille d'or, ainsi que le nom et la nationalité de celui ayant obtenu la médaille d'argent (tableau résultat avec 5 attributs)
-                         SELECT nomEpreuve,A_OR.nomAthlete AS GagnantOR,A_OR.pays,A_ARGENT.nomAthlete
-                         AS GagnantArgent,A_ARGENT.pays,A_BRONZE.nomAthlete
-                         AS GagnantBronze,A_BRONZE.pays FROM Athlete
-                         AS A_OR,Athlete AS A_Argent,Athlete
-                         AS A_Bronze,MedailleIndividuel,EpreuveIndividuel
-                         WHERE (A_OR.IDAthlete = IDGagnant AND type = 'Or')
-                         OR (A_ARGENT.IDAthlete = IDGagnant AND type = 'Argent')
-                         OR (A_BRONZE.IDAthlete = IDGagnant AND type = 'Bronze');
+\echo '3. Pour chaque épreuve, le nom et la nationalité de l\'athlète ayant obtenu la médaille d\b'or, ainsi que le nom et la nationalité de celui ayant obtenu la médaille d\'argent (tableau résultat avec 5 attributs)'
 
-
-
-
+/*
+SELECT nomEpreuve,
+A_OR.nomAthlete AS GagnantOR,
+A_OR.pays,
+A_ARGENT.nomAthlete AS GagnantArgent,
+A_ARGENT.pays,
+A_BRONZE.nomAthlete AS GagnantBronze,
+A_BRONZE.pays
+FROM Athlete AS A_OR,
+Athlete AS A_Argent,
+Athlete AS A_Bronze,
+MedailleIndividuel,
+EpreuveIndividuel
+WHERE (A_OR.IDAthlete = IDGagnant AND type = 'Or')
+OR (A_ARGENT.IDAthlete = IDGagnant AND type = 'Argent')
+OR (A_BRONZE.IDAthlete = IDGagnant AND type = 'Bronze');
+*/
 
 \echo '4. Les athlètes qui n\'ont obtenu aucune médaille d\'or'
 
@@ -124,13 +130,21 @@ FETCH FIRST 10 ROWS ONLY;
 
 \echo '5. Les sports individuels dans lesquels la France n\'a pas obtenu de médaille'
 
-/*
-SELECT nomSport
-FROM SPORT
-WHERE type = 'Individuel'
-AND IDSport NOT IN (
+SELECT DISTINCT nomSport AS Sport
+FROM Sport
+WHERE Sport.IDSport IN (
+  SELECT IDSport
+  FROM EpreuveIndividuel
+  WHERE EpreuveIndividuel.IDEpreuve IN (
+    SELECT IDEpreuve
+    FROM MedailleIndividuel
+    WHERE MedailleIndividuel.IDGagnant NOT IN (
+      SELECT IDAthlete
+      FROM Athlete
+      WHERE Athlete.Pays = 'France'
+    )
+  )
 );
-*/
 
 -- 6. Les coureurs qui n'ont jamais mis plus de dix secondes au 100m Implémentez ensuite au minimum 4 requêtes au choix parmi les 6 suivantes :
 
