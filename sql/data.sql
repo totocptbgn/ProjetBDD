@@ -1087,14 +1087,14 @@ INSERT INTO EpreuveCollective (IDSport, nomEpreuve, sexe) VALUES
   (19, 'Tournois', 'Homme');
 
 INSERT INTO EpreuveIndividuel(IDSport, nomEpreuve, Sexe) VALUES
-  (1, '50 mètres nage libre', 'Femme'),
-  (1, '100 mètres nage libre', 'Femme'),
-  (1, '200 metres nage libre', 'Femme'),
-  (1, '100 metres papillon', 'Femme'),
+  (1, '50m nage libre', 'Femme'),
+  (1, '100m nage libre', 'Femme'),
+  (1, '200m nage libre', 'Femme'),
+  (1, '100m papillon', 'Femme'),
   (1, '100 metre papillon', 'Homme'),
-  (1, '50 metres nage libre', 'Homme'),
-  (1, '100 metres nage libre', 'Homme'),
-  (1, '200 metres nage libre', 'Homme'),
+  (1, '50m nage libre', 'Homme'),
+  (1, '100m nage libre', 'Homme'),
+  (1, '200m nage libre', 'Homme'),
   (2, 'Complet', 'mixte'),
   (2, 'Saut d obstacle', 'mixte'),
   (2, 'Dressage', 'mixte'),
@@ -1415,14 +1415,14 @@ INSERT INTO MatchCollectif (NomMatch,IDEpreuve,dateMatch) VALUES
   ('Finale',28,'2016/08/16');
 
 INSERT INTO MatchIndividuel (NomMatch,IDEpreuve,dateMatch) VALUES
-  ('50 mètres nage libre',1,'2016/08/13'),
-  ('100 mètres nage libre',2,'2016/08/14'),
-  ('200 metres nage libre',3,'2016/08/15'),
-  ('100 metres papillon',4,'2016/08/16'),
-  ('100 metres papillon',5,'2016/08/16'),
-  ('50 mètres nage libre',6,'2016/08/13'),
-  ('100 mètres nage libre',7,'2016/08/14'),
-  ('200 metres nage libre',8,'2016/08/15'),
+  ('50m nage libre',1,'2016/08/13'),
+  ('100m nage libre',2,'2016/08/14'),
+  ('200m nage libre',3,'2016/08/15'),
+  ('100m papillon',4,'2016/08/16'),
+  ('100m papillon',5,'2016/08/16'),
+  ('50mètres nage libre',6,'2016/08/13'),
+  ('100mètres nage libre',7,'2016/08/14'),
+  ('200m nage libre',8,'2016/08/15'),
   ('Saut d obstacle',9,'2016/08/16'),
   ('Dressage',9,'2016/08/17'),
   ('Cross',9,'2016/08/18'),
@@ -1522,14 +1522,14 @@ INSERT INTO MatchIndividuel (NomMatch,IDEpreuve,dateMatch) VALUES
   ('Marathon',43,'2016/08/21');
 
 INSERT INTO MatchIndividuel (NomMatch,IDEpreuve,dateMatch) VALUES
-  ('50 mètres nage libre',1,'2016/08/13'),
-  ('100 mètres nage libre',2,'2016/08/14'),
-  ('200 metres nage libre',3,'2016/08/15'),
-  ('100 metres papillon',4,'2016/08/16'),
-  ('100 metres papillon',5,'2016/08/16'),
-  ('50 mètres nage libre',6,'2016/08/13'),
-  ('100 mètres nage libre',7,'2016/08/14'),
-  ('200 metres nage libre',8,'2016/08/15'),
+  ('50m nage libre',1,'2016/08/13'),
+  ('100m nage libre',2,'2016/08/14'),
+  ('200m nage libre',3,'2016/08/15'),
+  ('100m papillon',4,'2016/08/16'),
+  ('100m papillon',5,'2016/08/16'),
+  ('50mètres nage libre',6,'2016/08/13'),
+  ('100mètres nage libre',7,'2016/08/14'),
+  ('200m nage libre',8,'2016/08/15'),
   ('Saut d obstacle',9,'2016/08/16'),
   ('Dressage',9,'2016/08/17'),
   ('Cross',9,'2016/08/18'),
@@ -1663,18 +1663,18 @@ INSERT INTO ParticipationIndividuelle (IDMatch,IDParticipant,statut,score) VALUE
   --gagnant epreuve 3 =156;7;21
   --epreuve 8 = 158;157;44
   --
-  (3,158,'Victoire','00:00:45'),
-  (3,157,'Victoire','00:00:47'),
-  (3,44,'Victoire','00:00:49'),
-  (3,7,'Défaite','00:00:52'),
-  (3,21,'Défaite','00:00:54'),
-  (3,24,'Défaite','00:00:58'),
-  (8,44,'Victoire','00:00:42'),
-  (8,52,'Victoire','00:00:44'),
-  (8,83,'Victoire','00:00:46'),
-  (8,155,'Défaite','00:00:50'),
-  (8,158,'Défaite','00:00:52'),
-  (8,174,'Défaite','00:00:54'),
+  (3,158,'Victoire','45s'),
+  (3,157,'Victoire','47s'),
+  (3,44,'Victoire','49s'),
+  (3,7,'Défaite','52s'),
+  (3,21,'Défaite','54s'),
+  (3,24,'Défaite','58s'),
+  (8,44,'Victoire','42s'),
+  (8,52,'Victoire','44s'),
+  (8,83,'Victoire','46s'),
+  (8,155,'Défaite','50s'),
+  (8,158,'Défaite','52s'),
+  (8,174,'Défaite','54s'),
   (98,106,'Victoire','00:00:10'),
   (98,107,'Victoire','00:00:11'),
   (98,108,'Victoire','00:00:13'),
@@ -1712,10 +1712,9 @@ INSERT INTO ParticipationIndividuelle (IDMatch,IDParticipant,statut,score) VALUE
   (105,129,'Victoire','02:24:20'),
   (105,12,'Défaite','02:25:50');
 
-
 INSERT INTO Membres (IDAthlete,IDequipe)
-    SELECT IDAthlete,idequipe
-    FROM Athlete,Equipe
-    WHERE Athlete.sexe = Equipe.sexe
-    AND Athlete.pays = Equipe.pays
-    AND Athlete.IDSport = Equipe.IDSport;
+  SELECT IDAthlete,idequipe
+  FROM Athlete,Equipe
+  WHERE Athlete.sexe = Equipe.sexe
+  AND Athlete.pays = Equipe.pays
+  AND Athlete.IDSport = Equipe.IDSport;

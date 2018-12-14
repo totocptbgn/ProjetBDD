@@ -90,9 +90,19 @@ WHERE IDMatch IN (
 
 \echo '1. La moyenne des temps réalisés au 200 mètres nage libre par nationalité'
 
-\echo
-\echo '   /!\\ PAS ENCORE FAIT /!\\'
-\echo
+SELECT CONCAT(CAST(CAST(AVG(CAST(SUBSTRING(ParticipationIndividuelle.score, 1, 2) AS INT)) AS INT) AS TEXT), ' sec') AS TempsMoyen, Athlete.Pays
+FROM ParticipationIndividuelle, Athlete
+WHERE Athlete.IDAthlete = ParticipationIndividuelle.IDParticipant
+AND IDMatch IN (
+  SELECT IDMatch
+  FROM MatchIndividuel
+  WHERE IDEpreuve IN (
+    SELECT IDEpreuve
+    FROM EpreuveIndividuel
+    WHERE nomEpreuve = '200m nage libre'
+  )
+)
+GROUP BY Pays;
 
 \echo '2. Le nombre de médailles par pays représentés (rappel : une seule médaille est comptée pour une équipe)'
 
