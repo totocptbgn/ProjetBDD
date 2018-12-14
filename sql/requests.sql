@@ -107,8 +107,7 @@ WHERE IDAthlete NOT IN (
   FROM MedailleIndividuel
   WHERE type = 'Or'
 )
-FETCH FIRST 10 ROWS ONLY;
--- Pour ne pas à avoir tout les athlètes
+LIMIT 10; -- On affiche seulement 10 tuples pour ne pas à avoir à afficher tout les athlètes.
 
 \echo '5. Les sports individuels dans lesquels la France n\'a pas obtenu de médaille'
 
@@ -129,6 +128,20 @@ AND IDSport NOT IN (
 
 \echo '3. Les cinq catégories sportives pour lesquelles il y a le moins d\'épreuves'
 
+WITH Epreuves (IDEpreuves, nomSport) AS (
+  SELECT IDEpreuve, Sport.nomSport
+  FROM EpreuveIndividuel, Sport
+  WHERE EpreuveIndividuel.IDSport = Sport.IDSport
+  UNION
+  SELECT IDEpreuve, Sport.nomSport
+  FROM EpreuveCollective, Sport
+  WHERE EpreuveCollective.IDSport = Sport.IDSport
+)
+SELECT COUNT(IDEpreuves) AS NbrEpreuves, nomSport AS Sport
+FROM Epreuves
+GROUP BY Epreuves.nomSport
+ORDER BY NbrEpreuves ASC
+LIMIT 5;
 
 -- 4. Le pourcentage de médailles remportées par des femmes (y compris en équipe)
 -- 5. Le nombre total de points marqués par l'équipe féminine de handball qui a marqué plus de points que chaque équipe masculine de handball tout au long des jeux
