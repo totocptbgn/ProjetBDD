@@ -97,6 +97,18 @@ GROUP BY Pays
 ORDER BY NbrMedaille DESC;
 
 -- 3. Pour chaque épreuve, le nom et la nationalité de l'athlète ayant obtenu la médaille d'or, ainsi que le nom et la nationalité de celui ayant obtenu la médaille d'argent (tableau résultat avec 5 attributs)
+                                                                                                                                                                                                                                                                                                                                                                                     SELECT nomEpreuve,A_OR.nomAthlete AS GagnantOR,A_OR.pays,A_ARGENT.nomAthlete
+                                                                                                                                                                                                                                                                                                                                                                                     AS GagnantArgent,A_ARGENT.pays,A_BRONZE.nomAthlete
+                                                                                                                                                                                                                                                                                                                                                                                     AS GagnantBronze,A_BRONZE.pays FROM Athlete
+                                                                                                                                                                                                                                                                                                                                                                                     AS A_OR,Athlete AS A_Argent,Athlete
+                                                                                                                                                                                                                                                                                                                                                                                     AS A_Bronze,MedailleIndividuel,EpreuveIndividuel
+                                                                                                                                                                                                                                                                                                                                                                                     WHERE (A_OR.IDAthlete = IDGagnant AND type = 'Or')
+                                                                                                                                                                                                                                                                                                                                                                                     OR (A_ARGENT.IDAthlete = IDGagnant AND type = 'Argent')
+                                                                                                                                                                                                                                                                                                                                                                                     OR (A_BRONZE.IDAthlete = IDGagnant AND type = 'Bronze');
+
+
+
+
 
 \echo '4. Les athlètes qui n\'ont obtenu aucune médaille d\'or'
 
