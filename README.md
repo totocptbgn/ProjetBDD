@@ -13,3 +13,7 @@ Le sujet est disponible [ici](https://drive.google.com/open?id=1gmdVquTMsq3dl4Ro
 ## Membres
 
 [Thomas Copt-Bignon](https://github.com/totocptbgn/) & [Hind Hamila](https://github.com/hindhamila/).
+
+## Schéma
+
+![Schéma](https://github.com/totocptbgn/ProjetBDD/blob/master/Schema_E-R.jpg)
