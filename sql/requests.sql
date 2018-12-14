@@ -166,20 +166,39 @@ WHERE Sport.IDSport IN (
 
 \echo '6. Les coureurs qui n\'ont jamais mis plus de dix secondes au 100m :'
 
-\echo
-\echo '   /!\\ À FINIR /!\\'
-\echo
-
-  /*
-  SELECT nomAthlete AS Athlete
-  FROM Athlete
-  WHERE IDAthlete IN (
-    -- Athlètes faisant du 100m
+WITH Temps (seconds, IDParticipant) AS (
+  SELECT CAST(SUBSTRING(score, 7, 2) AS INT) AS seconds, IDParticipant
+  FROM ParticipationIndividuelle
+  WHERE IDmatch IN (
+    SELECT IDMatch
+    FROM MatchIndividuel
+    WHERE IDEpreuve IN (
+      SELECT IDEpreuve
+      FROM EpreuveIndividuel
+      WHERE nomEpreuve = '100m'
+    )
   )
-  AND IDAthlete NOT IN (
-    -- Athlètes ayant fait plus de 10s au 100m
-  );
-  */
+)
+SELECT nomAthlete
+FROM Athlete
+WHERE IDAthlete IN (
+  SELECT IDParticipant
+  FROM ParticipationIndividuelle
+  WHERE IDmatch IN (
+    SELECT IDMatch
+    FROM MatchIndividuel
+    WHERE IDEpreuve IN (
+      SELECT IDEpreuve
+      FROM EpreuveIndividuel
+      WHERE nomEpreuve = '100m'
+    )
+  )
+)
+AND IDAthlete NOT IN (
+  SELECT IDParticipant
+  FROM temps
+  WHERE seconds > 10
+);
 
 \echo '---------------------------------- Dificulté III ----------------------------------'
 \echo

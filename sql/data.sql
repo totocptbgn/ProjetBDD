@@ -5,7 +5,8 @@
 --
 \i arch.sql
 
-
+-- Insertion des données
+--
 
 INSERT INTO Sport (type, nomSport) VALUES
   ('Individuel', 'Natation'),
