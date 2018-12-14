@@ -9,7 +9,7 @@
 -- Requêtes :
 --
 
-\echo '----------------- Dificulté I -----------------'
+\echo '---------------------------------- Dificulté I ----------------------------------'
 \echo
 
 \echo '1. La liste des athlètes italiens ayant obtenu une médaille :'
@@ -52,8 +52,18 @@ AND IDAthlete IN (
   )
 );
 
--- 4. Les médailles gagnées par Michael Phelps, avec l\'épreuve et le temps correspondants
-  -- /!\ Remplir les médailles remportées par MP et remplir les medailles avec l'id de participation
+\echo '4. Les médailles gagnées par Michael Phelps, avec l\'épreuve et le temps correspondants :'
+
+\echo '   (Pas faisable sans ratacher la participation à la médaille...) Requête sans le temps :'
+
+SELECT EpreuveIndividuel.nomEpreuve, MedailleIndividuel.type
+FROM EpreuveIndividuel, MedailleIndividuel
+WHERE EpreuveIndividuel.IDEpreuve = MedailleIndividuel.IDEpreuve
+AND MedailleIndividuel.IDGagnant IN (
+  SELECT IDAthlete
+  FROM Athlete
+  WHERE nomAthlete = 'Michael Phelps'
+);
 
 \echo '5. La liste des sports pratiqués en équipe'
 
@@ -75,7 +85,7 @@ WHERE IDMatch IN (
   )
 );
 
-\echo '----------------- Dificulté II -----------------'
+\echo '---------------------------------- Dificulté II ----------------------------------'
 \echo
 
 -- 1. La moyenne des temps réalisés au 200 mètres nage libre par nationalité
@@ -96,25 +106,30 @@ FROM Medailles
 GROUP BY Pays
 ORDER BY NbrMedaille DESC;
 
-\echo '3. Pour chaque épreuve, le nom et la nationalité de l\'athlète ayant obtenu la médaille d\b'or, ainsi que le nom et la nationalité de celui ayant obtenu la médaille d\'argent (tableau résultat avec 5 attributs)'
+\echo '3. Pour chaque épreuve, le nom et la nationalité de l\'athlète ayant obtenu la médaille d\'or, ainsi que le nom et la nationalité de'
+\echo '   celui ayant obtenu la médaille d\'argent (tableau résultat avec 5 attributs)'
 
-/*
-SELECT nomEpreuve,
-A_OR.nomAthlete AS GagnantOR,
-A_OR.pays,
-A_ARGENT.nomAthlete AS GagnantArgent,
-A_ARGENT.pays,
-A_BRONZE.nomAthlete AS GagnantBronze,
-A_BRONZE.pays
-FROM Athlete AS A_OR,
-Athlete AS A_Argent,
-Athlete AS A_Bronze,
-MedailleIndividuel,
-EpreuveIndividuel
-WHERE (A_OR.IDAthlete = IDGagnant AND type = 'Or')
-OR (A_ARGENT.IDAthlete = IDGagnant AND type = 'Argent')
-OR (A_BRONZE.IDAthlete = IDGagnant AND type = 'Bronze');
-*/
+\echo
+\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo
+
+  /*
+  SELECT nomEpreuve,
+  A_OR.nomAthlete AS GagnantOR,
+  A_OR.pays,
+  A_ARGENT.nomAthlete AS GagnantArgent,
+  A_ARGENT.pays,
+  A_BRONZE.nomAthlete AS GagnantBronze,
+  A_BRONZE.pays
+  FROM Athlete AS A_OR,
+  Athlete AS A_Argent,
+  Athlete AS A_Bronze,
+  MedailleIndividuel,
+  EpreuveIndividuel
+  WHERE (A_OR.IDAthlete = IDGagnant AND type = 'Or')
+  OR (A_ARGENT.IDAthlete = IDGagnant AND type = 'Argent')
+  OR (A_BRONZE.IDAthlete = IDGagnant AND type = 'Bronze');
+  */
 
 \echo '4. Les athlètes qui n\'ont obtenu aucune médaille d\'or'
 
@@ -125,8 +140,7 @@ WHERE IDAthlete NOT IN (
   FROM MedailleIndividuel
   WHERE type = 'Or'
 )
-FETCH FIRST 10 ROWS ONLY;
--- Pour ne pas à avoir tout les athlètes
+LIMIT 10; -- On affiche seulement 10 tuples pour ne pas à avoir à afficher tout les athlètes.
 
 \echo '5. Les sports individuels dans lesquels la France n\'a pas obtenu de médaille'
 
@@ -146,16 +160,59 @@ WHERE Sport.IDSport IN (
   )
 );
 
--- 6. Les coureurs qui n'ont jamais mis plus de dix secondes au 100m Implémentez ensuite au minimum 4 requêtes au choix parmi les 6 suivantes :
+\echo '6. Les coureurs qui n\'ont jamais mis plus de dix secondes au 100m :'
 
-\echo '----------------- Dificulté III -----------------'
 \echo
--- 1. L'athlète qui a concouru sept jours consécutifs et a gagné à chaque fois
--- 2. Les pays qui ont eu une médaille dans chaque catégorie sportive (pas forcément à toutes les épreuves de cette catégorie)
+\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo
+
+\echo '---------------------------------- Dificulté III ----------------------------------'
+\echo
+
+\echo '1. L\'athlète qui a concouru sept jours consécutifs et a gagné à chaque fois :'
+
+\echo
+\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo
+
+\echo '2. Les pays qui ont eu une médaille dans chaque catégorie sportive (pas forcément à toutes les épreuves de cette catégorie) :'
+
+\echo
+\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo
 
 \echo '3. Les cinq catégories sportives pour lesquelles il y a le moins d\'épreuves'
 
+WITH Epreuves (IDEpreuves, nomSport) AS (
+  SELECT IDEpreuve, Sport.nomSport
+  FROM EpreuveIndividuel, Sport
+  WHERE EpreuveIndividuel.IDSport = Sport.IDSport
+  UNION
+  SELECT IDEpreuve, Sport.nomSport
+  FROM EpreuveCollective, Sport
+  WHERE EpreuveCollective.IDSport = Sport.IDSport
+)
+SELECT COUNT(IDEpreuves) AS NbrEpreuves, nomSport AS Sport
+FROM Epreuves
+GROUP BY Epreuves.nomSport
+ORDER BY NbrEpreuves ASC
+LIMIT 5;
 
--- 4. Le pourcentage de médailles remportées par des femmes (y compris en équipe)
--- 5. Le nombre total de points marqués par l'équipe féminine de handball qui a marqué plus de points que chaque équipe masculine de handball tout au long des jeux
--- 6. Les pays qui ont obtenu plus de médailles que la France dans chaque sport
+\echo '4. Le pourcentage de médailles remportées par des femmes (y compris en équipe) :'
+
+\echo
+\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo
+
+\echo '5. Le nombre total de points marqués par l\'équipe féminine de handball qui a marqué plus de points que chaque équipe masculine'
+\echo '   de handball tout au long des jeux :'
+
+\echo
+\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo
+
+\echo '6. Les pays qui ont obtenu plus de médailles que la France dans chaque sport'
+
+\echo
+\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo
