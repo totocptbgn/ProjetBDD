@@ -3,12 +3,13 @@
 
 -- Clear la console
 --
+
 \! clear
 
 -- Requêtes :
 --
 
-\echo '----------------- Dificulté II -----------------'
+\echo '----------------- Dificulté I -----------------'
 \echo
 
 \echo '1. La liste des athlètes italiens ayant obtenu une médaille :'
@@ -62,7 +63,7 @@ WHERE type = 'Collectif';
 
 \echo '6. Le meilleur temps réalisé au marathon'
 
-SELECT MAX(Score)
+SELECT Score
 FROM ParticipationIndividuelle
 WHERE IDMatch IN (
   SELECT IDMatch
@@ -105,7 +106,9 @@ WHERE IDAthlete NOT IN (
   SELECT IDGagnant
   FROM MedailleIndividuel
   WHERE type = 'Or'
-);
+)
+FETCH FIRST 10 ROWS ONLY;
+-- Pour ne pas à avoir tout les athlètes
 
 \echo '5. Les sports individuels dans lesquels la France n\'a pas obtenu de médaille'
 
