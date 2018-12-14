@@ -13,17 +13,17 @@ SET client_min_messages TO WARNING;
 -- On supprime les tables si elles existent déjà
 --
 DROP TABLE IF EXISTS Athlete CASCADE;
-DROP TABLE IF EXISTS Equipe CASCADE;
-DROP TABLE IF EXISTS Sport CASCADE;
-DROP TABLE IF EXISTS EpreuveIndividuel CASCADE;
 DROP TABLE IF EXISTS EpreuveCollective CASCADE;
+DROP TABLE IF EXISTS EpreuveIndividuel CASCADE;
+DROP TABLE IF EXISTS Equipe CASCADE;
+DROP TABLE IF EXISTS MatchCollectif CASCADE;
 DROP TABLE IF EXISTS MatchIndividuel CASCADE;
-DROP TABLE IF EXISTS ParticipationCollectif CASCADE;
-DROP TABLE IF EXISTS Membres CASCADE;
 DROP TABLE IF EXISTS MedailleCollectif CASCADE;
 DROP TABLE IF EXISTS MedailleIndividuel CASCADE;
+DROP TABLE IF EXISTS Membres CASCADE;
+DROP TABLE IF EXISTS ParticipationCollectif CASCADE;
 DROP TABLE IF EXISTS ParticipationIndividuelle CASCADE;
-DROP TABLE IF EXISTS MatchCollectif CASCADE;
+DROP TABLE IF EXISTS Sport CASCADE;
 
 -- Création des tables
 --
@@ -103,7 +103,7 @@ CREATE TABLE EpreuveCollective (
 
 CREATE TABLE MatchIndividuel (
 	--
-	-- liste des matchs avec nom, id, date, et épreuve
+	-- liste des matchs individuels avec nom, id, date, et épreuve
 	--
 	NomMatch text,
 	IDMatch serial primary key,
@@ -115,7 +115,7 @@ CREATE TABLE MatchIndividuel (
 
 CREATE TABLE MatchCollectif (
 	--
-	-- liste des matchs avec nom, id, date, et épreuve
+	-- liste des matchs collectifs avec nom, id, date, et épreuve
 	--
 	NomMatch text,
 	IDMatch serial primary key,
@@ -155,10 +155,10 @@ CREATE TABLE MedailleCollectif (
 
 CREATE TABLE ParticipationCollectif (
 	--
-	-- liste des participants à un match avec id, athlete/équipe, statut
-	-- fais le lien entre la table Match et les tables Athlete/Equipe
+	-- liste des participants à un match avec id d'équipe, statut
+	-- fais le lien entre la table MatchIndividuel et la table Équipe
 	-- status détermine si le participant à gagné ou perdu
-	-- score est de type text et contient soir un score, soit un temps
+	-- score est de type text et contient soit un score, soit un temps
 	--
 	IDMatch int,
 	IDParticipant int,
@@ -172,6 +172,12 @@ CREATE TABLE ParticipationCollectif (
 );
 
 CREATE TABLE ParticipationIndividuelle (
+	--
+	-- liste des participants à un match avec id d'athlete, statut
+	-- fais le lien entre la table MatchIndividuel et la table Athlete
+	-- status détermine si le participant à gagné ou perdu
+	-- score est de type text et contient soit un score, soit un temps
+	--
 	IDMatch int,
 	IDParticipant int,
 	statut text,

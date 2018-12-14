@@ -1,18 +1,6 @@
 
 -- Ce fichier contient les requetes.
 
-/*
-    SELECT * FROM Athlete;
-    SELECT * FROM Equipe;
-    SELECT * FROM Sport;
-    SELECT * FROM EpreuveIndividuel;
-    SELECT * FROM EpreuveCollective;
-    SELECT * FROM Match;
-    SELECT * FROM Medaille;
-    SELECT * FROM Particpation;
-    SELECT * FROM Membres;
-*/
-
 -- Clear la console
 --
 \! clear
@@ -20,7 +8,8 @@
 -- Requêtes :
 --
 
--- Dificulté I --
+\echo '----------------- Dificulté II -----------------'
+\echo
 
 \echo '1. La liste des athlètes italiens ayant obtenu une médaille :'
 
@@ -30,7 +19,6 @@ WHERE Athlete.IDAthlete = MedailleIndividuel.IDGagnant
 AND Athlete.Pays = 'Italie';
 
 \echo '2. Le nom et la nationalité des médaillés du 100m, 200m, et 400m avec à chaque fois le type de médaille (or, argent, bronze) :'
-  -- Aucun résultat
 
 SELECT Athlete.NomAthlete AS Nom, Athlete.Pays, MedailleIndividuel.type
 FROM Athlete, MedailleIndividuel
@@ -44,7 +32,7 @@ AND IDEpreuve IN (
 );
 
 \echo '3. Les membres de l\'équipe féminine de handball de moins de 25 ans :'
-  -- Aucun résultat...
+
 SELECT NomAthlete AS Athlete
 FROM Athlete
 WHERE Age < 25
@@ -74,11 +62,11 @@ WHERE type = 'Collectif';
 
 \echo '6. Le meilleur temps réalisé au marathon'
 
-SELECT Score
-FROM Particpation
+SELECT MAX(Score)
+FROM ParticipationIndividuelle
 WHERE IDMatch IN (
   SELECT IDMatch
-  FROM Match
+  FROM MatchIndividuel
   WHERE IDEpreuve IN (
     SELECT IDEpreuve
     FROM EpreuveIndividuel
@@ -86,17 +74,25 @@ WHERE IDMatch IN (
   )
 );
 
--- Dificulté II --
+\echo '----------------- Dificulté II -----------------'
+\echo
 
 -- 1. La moyenne des temps réalisés au 200 mètres nage libre par nationalité
 
 \echo '2. Le nombre de médailles par pays représentés (rappel : une seule médaille est comptée pour une équipe)'
-  -- Ne fais que les sports collectifs ou les sport individuels (pas les deux en même temps)
 
-SELECT COUNT(MedailleIndividuel.IDMedaille) AS NbrMedaille, Athlete.Pays
-FROM MedailleIndividuel, Athlete
-WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
-GROUP BY Athlete.Pays
+WITH Medailles (IDMedaille, Pays) AS (
+  SELECT MedailleIndividuel.IDMedaille, Athlete.Pays
+  FROM MedailleIndividuel, Athlete
+  WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
+  UNION
+  SELECT MedailleCollectif.IDMedaille, Equipe.Pays
+  FROM MedailleCollectif, Equipe
+  WHERE MedailleCollectif.IDGagnant = Equipe.IDequipe
+)
+SELECT COUNT(IDMedaille) AS NbrMedaille, Pays
+FROM Medailles
+GROUP BY Pays
 ORDER BY NbrMedaille DESC;
 
 -- 3. Pour chaque épreuve, le nom et la nationalité de l'athlète ayant obtenu la médaille d'or, ainsi que le nom et la nationalité de celui ayant obtenu la médaille d'argent (tableau résultat avec 5 attributs)
