@@ -88,7 +88,11 @@ WHERE IDMatch IN (
 \echo '---------------------------------- Dificulté II ----------------------------------'
 \echo
 
--- 1. La moyenne des temps réalisés au 200 mètres nage libre par nationalité
+\echo '1. La moyenne des temps réalisés au 200 mètres nage libre par nationalité'
+
+\echo
+\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo
 
 \echo '2. Le nombre de médailles par pays représentés (rappel : une seule médaille est comptée pour une équipe)'
 
