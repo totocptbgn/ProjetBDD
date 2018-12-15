@@ -1,6 +1,31 @@
 DROP TABLE IF EXISTS MatchIndividuel CASCADE;
 DROP TABLE IF EXISTS MatchCollectif CASCADE;
 
+CREATE TABLE MatchIndividuel (
+	--
+	-- liste des matchs individuels avec nom, id, date, et épreuve
+	--
+	NomMatch text,
+	IDMatch serial primary key,
+	dateMatch date NOT NULL,
+	IDEpreuve int,
+
+
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve)
+);
+
+CREATE TABLE MatchCollectif (
+	--
+	-- liste des matchs collectifs avec nom, id, date, et épreuve
+	--
+	NomMatch text,
+	IDMatch serial primary key,
+	dateMatch date NOT NULL,
+	IDEpreuve int,
+
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve)
+);
+
 ALTER TABLE MatchIndividuel ADD Lieu varchar;
 ALTER TABLE MatchIndividuel ADD nbrVolontaires int;
 ALTER TABLE MatchCollectif ADD Lieu varchar;
