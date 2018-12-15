@@ -16,4 +16,4 @@ Le sujet est disponible [ici](https://github.com/N07070/Projet-BDD/blob/master/p
 
 ## Schéma
 
-![Schéma](https://github.com/totocptbgn/ProjetBDD/blob/master/Schema_E-R.jpg)
+![Schéma](https://github.com/totocptbgn/ProjetBDD/blob/master/Schema_E-R.png)
