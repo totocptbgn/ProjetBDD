@@ -110,7 +110,7 @@ WITH Medailles (IDMedaille, Pays) AS (
   SELECT MedailleIndividuel.IDMedaille, Athlete.Pays
   FROM MedailleIndividuel, Athlete
   WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
-  UNION
+  UNION ALL
   SELECT MedailleCollectif.IDMedaille, Equipe.Pays
   FROM MedailleCollectif, Equipe
   WHERE MedailleCollectif.IDGagnant = Equipe.IDequipe
@@ -226,7 +226,7 @@ WITH Epreuves (IDEpreuves, nomSport) AS (
   SELECT IDEpreuve, Sport.nomSport
   FROM EpreuveIndividuel, Sport
   WHERE EpreuveIndividuel.IDSport = Sport.IDSport
-  UNION
+  UNION ALL
   SELECT IDEpreuve, Sport.nomSport
   FROM EpreuveCollective, Sport
   WHERE EpreuveCollective.IDSport = Sport.IDSport
@@ -243,6 +243,10 @@ WITH Medailles (IDGagnant, Sexe) AS (
   SELECT MedailleIndividuel.IDGagnant, Athlete.sexe
   FROM MedailleIndividuel, Athlete
   WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
+  UNION ALL
+  SELECT MedailleCollectif.IDGagnant, Equipe.sexe
+  FROM MedailleCollectif, Equipe
+  WHERE MedailleCollectif.IDGagnant = Equipe.IDEquipe
 )
 SELECT CONCAT(CAST(COUNT(Sexe) * 100 / (Select COUNT(*) FROM Medailles) AS TEXT), ' %') AS Femme_Medailles
 FROM Medailles
