@@ -3,12 +3,10 @@
 
 -- Clear la console
 --
-
 \! clear
 
 -- Requêtes :
 --
-
 \echo '---------------------------------- Dificulté I ----------------------------------'
 \echo
 
@@ -288,17 +286,36 @@ WHERE nbMedaillesTotal > ALL (
 
 \echo 'Les 10 pays qui ont remportés le plus de medailles'
 
-\echo
-\echo '   Pas fait...'
-\echo
+WITH MedaillePays (IDMedaille, Pays) AS (
+  SELECT MedailleIndividuel.IDMedaille, Athlete.Pays
+  FROM MedailleIndividuel, Athlete
+  WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
+  UNION ALL
+  SELECT MedailleCollectif.IDMedaille, Equipe.Pays
+  FROM MedailleCollectif, Equipe
+  WHERE MedailleCollectif.IDGagnant = Equipe.IDequipe
+)
+SELECT COUNT(IDMedaille) AS NbrMedaille, Pays
+FROM MedaillePays
+GROUP BY Pays
+ORDER BY NbrMedaille DESC;
 
-\echo 'Les athletes et equipes qui n\'ont concouru que le 13 aout'
+\echo 'Les athlètes et équipes qui n\'ont concouru que le 15 août :'
 
-\echo
-\echo '   Pas fait...'
-\echo
+SELECT Athlete.NomAthlete
+FROM Athlete
+WHERE Athlete.IDAthlete IN (
+  SELECT ParticipationIndividuelle.IDParticipant
+  FROM ParticipationIndividuelle
+)
+AND Athlete.IDAthlete NOT IN (
+  SELECT ParticipationIndividuelle.IDParticipant
+  FROM ParticipationIndividuelle, MatchIndividuel
+  WHERE ParticipationIndividuelle.IDMatch = MatchIndividuel.IDMatch
+  AND MatchIndividuel.dateMatch != '2016/08/15'
+);
 
-\echo 'Le pourcentage d\'athletes ayant participé à des épreuve d\'athlétisme par Pays'
+\echo 'Le pourcentage d\'athletes ayant participé à des épreuves d\'athlétisme par pays :'
 
 \echo
 \echo '   Pas fait...'
