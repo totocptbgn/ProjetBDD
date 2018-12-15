@@ -1349,8 +1349,8 @@ INSERT INTO MedailleCollectif (type, IDEpreuve, IDGagnant) VALUES
   ('Bronze',28,286);
 
 INSERT INTO MatchCollectif (NomMatch,IDEpreuve,dateMatch) VALUES
-  ('Relais 4*400',1,'2016/08/05'),
-  ('Relais 4*400',2,'2016/08/05'),
+  ('Finale Relais 4*400 Homme',1,'2016/08/05'),
+  ('Finale Relais 4*400 Femme',2,'2016/08/05'),
   ('Deux de couple',3,'2016/08/05'),
   ('Quatre de couple',4,'2016/08/06'),
   ('Huit',5,'2016/08/07'),
@@ -1549,7 +1549,13 @@ INSERT INTO ParticipationCollectif (IDMatch,IDParticipant,statut,score) VALUES
   (25,169,'Victoire','20'),
   (25,115,'Défaite','18'),
   (26,151,'Victoire','20'),
-  (26,169,'Défaite','18');
+  (26,169,'Défaite','18'),
+  (1, 19, 'Victoire','37.40 sec'),
+  (1, 1, 'Défaite','37.45 sec'),
+  (1, 217, 'Défaite','37.44 sec'),
+  (2, 218, 'Victoire','37.50 sec'),
+  (2, 20, 'Défaite','37.55 sec'),
+  (2, 128, 'Défaite','37.54 sec');
 
 INSERT INTO ParticipationIndividuelle (IDMatch,IDParticipant,statut,score) VALUES
   --epreuve dont on a besoin = 3;36;37;38;39;40;41;42;43;8

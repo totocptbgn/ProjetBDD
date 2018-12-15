@@ -317,6 +317,29 @@ AND Athlete.IDAthlete NOT IN (
 
 \echo 'Le pourcentage d\'athletes ayant participé à des épreuves d\'athlétisme par pays :'
 
-\echo
-\echo '   Pas fait...'
-\echo
+WITH Athletes (nomAthlete, Pays) AS (
+  WITH PleinDAthletes (nomAthlete, Pays) AS (
+    SELECT Athlete.nomAthlete, Athlete.Pays
+    FROM Athlete, ParticipationIndividuelle, Sport, MatchIndividuel, EpreuveIndividuel
+    WHERE Sport.nomSport = 'Athlétisme'
+    AND EpreuveIndividuel.IDSport = Sport.IDSport
+    AND MatchIndividuel.IDEpreuve = EpreuveIndividuel.IDEpreuve
+    AND ParticipationIndividuelle.IDMatch = MatchIndividuel.IDMatch
+    AND Athlete.IDAthlete = ParticipationIndividuelle.IDParticipant
+    UNION ALL
+    SELECT Athlete.nomAthlete, Athlete.Pays
+    FROM Athlete, ParticipationCollectif, Membres, Sport, MatchCollectif, EpreuveCollective
+    WHERE Sport.nomSport = 'Athlétisme'
+    AND EpreuveCollective.IDSport = Sport.IDSport
+    AND MatchCollectif.IDEpreuve = EpreuveCollective.IDEpreuve
+    AND ParticipationCollectif.IDMatch = MatchCollectif.IDMatch
+    AND Membres.IDEquipe = ParticipationCollectif.IDParticipant
+    AND Athlete.IDAthlete = Membres.IDAthlete
+  )
+  SELECT DISTINCT *
+  FROM PleinDAthletes
+)
+SELECT CONCAT('0,', CONCAT(CAST(COUNT(Athletes.nomAthlete) * 1000 / (Select COUNT(*) FROM Athlete) AS TEXT), ' %')) AS Athlt, Pays
+FROM Athletes
+GROUP BY Pays
+ORDER BY Pays;
