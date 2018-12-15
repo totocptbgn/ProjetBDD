@@ -285,3 +285,8 @@ WHERE nbMedaillesTotal > ALL (
 
 \echo '---------------------------------- Requêtes Perso ----------------------------------'
 \echo
+
+--Etape 4
+--equipes qui n'ont pas eu de medailles
+--les athletes et equipes qui n'ont concouru que le 13 aout/1 jour
+--le pourcentage d'athletes feminins
