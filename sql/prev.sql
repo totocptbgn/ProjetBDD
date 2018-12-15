@@ -5,11 +5,6 @@
 --
 \i data.sql
 
--- Clear la console
---
-\! clear
-
-
 -- Modification des tables et re-remplissage
 --
 DROP TABLE IF EXISTS MatchIndividuel CASCADE;
@@ -208,9 +203,14 @@ INSERT INTO MatchCollectif (NomMatch,IDEpreuve,dateMatch,Lieu,nbrVolontaires) VA
   ('Demi finale',28,'2016/08/15','Maracana, Stade Olympique',18),
   ('Finale',28,'2016/08/16','Maracana, Stade Olympique',24);
 
+
+-- Clear la console
+--
+\! clear
+
+
 -- Requetes
 --
-
 \echo
 \echo 'Nombre de volontaires necessaires par Lieu et Date :'
 
@@ -225,3 +225,33 @@ SELECT COUNT(nbrVolontaires) AS nbrVltr, Lieu, dateMatch
 FROM Organisation
 GROUP BY Lieu, dateMatch
 ORDER BY dateMatch;
+
+\echo 'Les 10 endroits et dates où l\'on auras besoin de plus de volontaires :'
+
+WITH Organisation (nbrVolontaires, Lieu, dateMatch) AS (
+  SELECT MatchIndividuel.nbrVolontaires, MatchIndividuel.Lieu, MatchIndividuel.dateMatch
+  FROM MatchIndividuel
+  UNION ALL
+  SELECT MatchCollectif.nbrVolontaires, MatchCollectif.Lieu, MatchCollectif.dateMatch
+  FROM MatchCollectif
+)
+SELECT COUNT(nbrVolontaires) AS nbrVolontaires, Lieu, dateMatch
+FROM Organisation
+GROUP BY Lieu, dateMatch
+ORDER BY nbrVolontaires DESC
+LIMIT 10;
+
+\echo 'Les 10 endroits et dates où l\'on auras besoin de moins de volontaires :'
+
+WITH Organisation (nbrVolontaires, Lieu, dateMatch) AS (
+  SELECT MatchIndividuel.nbrVolontaires, MatchIndividuel.Lieu, MatchIndividuel.dateMatch
+  FROM MatchIndividuel
+  UNION ALL
+  SELECT MatchCollectif.nbrVolontaires, MatchCollectif.Lieu, MatchCollectif.dateMatch
+  FROM MatchCollectif
+)
+SELECT COUNT(nbrVolontaires) AS nbrVolontaires, Lieu, dateMatch
+FROM Organisation
+GROUP BY Lieu, dateMatch
+ORDER BY nbrVolontaires ASC
+LIMIT 10;
