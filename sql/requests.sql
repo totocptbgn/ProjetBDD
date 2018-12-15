@@ -262,6 +262,13 @@ GROUP BY Sexe;
 
 \echo '6. Les pays qui ont obtenu plus de médailles que la France dans chaque sport'
 
+<<<<<<< HEAD
+\echo
+\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo
+
+--Etape 4
+=======
 WITH MedaillePaysPart (Pays, Sport, nbMedaillesTotal) AS (
   SELECT Athlete.Pays, Sport.nomSport, COUNT(MedailleIndividuel.IDMedaille)
   FROM Athlete, Sport, MedailleIndividuel, EpreuveIndividuel
@@ -282,3 +289,4 @@ WHERE nbMedaillesTotal > ALL (
   FROM MedaillePaysPart
   WHERE Pays IN ('France')
 );
+>>>>>>> cf0865978c5286868a772ea9919a410348737e86
