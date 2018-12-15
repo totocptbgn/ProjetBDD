@@ -8,7 +8,7 @@ Pour construire la base données : `psql --command "\i data.sql"`
 
 ## Sujet
 
-Le sujet est disponible [ici](https://drive.google.com/open?id=1gmdVquTMsq3dl4Rof4svdE4HOirRGMEy).
+Le sujet est disponible [ici](https://github.com/N07070/Projet-BDD/blob/master/projet.pdf).
 
 ## Membres
 
