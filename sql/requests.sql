@@ -211,13 +211,13 @@ AND IDAthlete NOT IN (
 \echo '1. L\'athlète qui a concouru sept jours consécutifs et a gagné à chaque fois :'
 
 \echo
-\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo '   Pas fait...'
 \echo
 
 \echo '2. Les pays qui ont eu une médaille dans chaque catégorie sportive (pas forcément à toutes les épreuves de cette catégorie) :'
 
 \echo
-\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo '   Pas fait...'
 \echo
 
 \echo '3. Les cinq catégories sportives pour lesquelles il y a le moins d\'épreuves'
@@ -257,7 +257,7 @@ GROUP BY Sexe;
 \echo '   de handball tout au long des jeux :'
 
 \echo
-\echo '   /!\\ PAS ENCORE FAIT /!\\'
+\echo '   Pas fait...'
 \echo
 
 \echo '6. Les pays qui ont obtenu plus de médailles que la France dans chaque sport'
@@ -282,3 +282,6 @@ WHERE nbMedaillesTotal > ALL (
   FROM MedaillePaysPart
   WHERE Pays IN ('France')
 );
+
+\echo '---------------------------------- Requêtes Perso ----------------------------------'
+\echo
