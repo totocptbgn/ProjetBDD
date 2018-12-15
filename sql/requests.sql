@@ -286,7 +286,20 @@ WHERE nbMedaillesTotal > ALL (
 \echo '---------------------------------- Requêtes Perso ----------------------------------'
 \echo
 
---Etape 4
---equipes qui n'ont pas eu de medailles
---les athletes et equipes qui n'ont concouru que le 13 aout/1 jour
---le pourcentage d'athletes feminins
+\echo 'Les 10 pays qui ont remportés le plus de medailles'
+
+\echo
+\echo '   Pas fait...'
+\echo
+
+\echo 'Les athletes et equipes qui n\'ont concouru que le 13 aout'
+
+\echo
+\echo '   Pas fait...'
+\echo
+
+\echo 'Le pourcentage d\'athletes ayant participé à des épreuve d\'athlétisme par Pays'
+
+\echo
+\echo '   Pas fait...'
+\echo
