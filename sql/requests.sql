@@ -239,9 +239,15 @@ LIMIT 5;
 
 \echo '4. Le pourcentage de médailles remportées par des femmes (y compris en équipe) :'
 
-\echo
-\echo '   /!\\ PAS ENCORE FAIT /!\\'
-\echo
+WITH Medailles (IDGagnant, Sexe) AS (
+  SELECT MedailleIndividuel.IDGagnant, Athlete.sexe
+  FROM MedailleIndividuel, Athlete
+  WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
+)
+SELECT CONCAT(CAST(COUNT(Sexe) * 100 / (Select COUNT(*) FROM Medailles) AS TEXT), ' %') AS Femme_Medailles
+FROM Medailles
+WHERE Sexe = 'Femme'
+GROUP BY Sexe;
 
 \echo '5. Le nombre total de points marqués par l\'équipe féminine de handball qui a marqué plus de points que chaque équipe masculine'
 \echo '   de handball tout au long des jeux :'
