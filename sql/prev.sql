@@ -1,3 +1,6 @@
+
+-- Ce fichier est à utiliser pour la partie 4 'Organisation et Prévention'
+
 -- Nettoyage et reconstruction des données
 --
 \i data.sql
@@ -6,6 +9,9 @@
 --
 \! clear
 
+
+-- Modification des tables et re-remplissage
+--
 DROP TABLE IF EXISTS MatchIndividuel CASCADE;
 DROP TABLE IF EXISTS MatchCollectif CASCADE;
 
@@ -133,8 +139,8 @@ INSERT INTO MatchIndividuel (NomMatch, IDEpreuve, dateMatch, Lieu, nbrVolontaire
   ('100m',39,'2016/08/19','Stade Olympique',16),
   ('200m',40,'2016/08/20','Stade Olympique',16),
   ('400m',41,'2016/08/21','Stade Olympique',16),
-  ('Marathon',42,'2016/08/21','Stade Maracana, Sambodrome',28),
-  ('Marathon',43,'2016/08/21','Stade Maracana, Sambodrome',28);
+  ('Marathon',42,'2016/08/21','Sambodrome',28),
+  ('Marathon',43,'2016/08/21','Sambodrome',28);
 
 INSERT INTO MatchCollectif (NomMatch,IDEpreuve,dateMatch,Lieu,nbrVolontaires) VALUES
   ('Relais 4*400',1,'2016/08/05','Stade Copacabana',12),
@@ -201,3 +207,21 @@ INSERT INTO MatchCollectif (NomMatch,IDEpreuve,dateMatch,Lieu,nbrVolontaires) VA
   ('Demi finale',28,'2016/08/15','Maracana, Stade Olympique',18),
   ('Demi finale',28,'2016/08/15','Maracana, Stade Olympique',18),
   ('Finale',28,'2016/08/16','Maracana, Stade Olympique',24);
+
+-- Requetes
+--
+
+\echo
+\echo 'Nombre de volontaires necessaires par Lieu et Date :'
+
+WITH Organisation (nbrVolontaires, Lieu, dateMatch) AS (
+  SELECT MatchIndividuel.nbrVolontaires, MatchIndividuel.Lieu, MatchIndividuel.dateMatch
+  FROM MatchIndividuel
+  UNION ALL
+  SELECT MatchCollectif.nbrVolontaires, MatchCollectif.Lieu, MatchCollectif.dateMatch
+  FROM MatchCollectif
+)
+SELECT COUNT(nbrVolontaires) AS nbrVltr, Lieu, dateMatch
+FROM Organisation
+GROUP BY Lieu, dateMatch
+ORDER BY dateMatch;
