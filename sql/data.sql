@@ -1348,7 +1348,7 @@ INSERT INTO MedailleCollectif (type, IDEpreuve, IDGagnant) VALUES
   ('Argent',28,261),
   ('Bronze',28,286);
 
-INSERT INTO MatchCollectif (NomMatch,IDEpreuve,dateMatch) VALUES
+INSERT INTO MatchCollectif (NomMatch, IDEpreuve, dateMatch) VALUES
   ('Finale Relais 4*400 Homme',1,'2016/08/05'),
   ('Finale Relais 4*400 Femme',2,'2016/08/05'),
   ('Deux de couple',3,'2016/08/05'),
@@ -1414,7 +1414,7 @@ INSERT INTO MatchCollectif (NomMatch,IDEpreuve,dateMatch) VALUES
   ('Demi finale',28,'2016/08/15'),
   ('Finale',28,'2016/08/16');
 
-INSERT INTO MatchIndividuel (NomMatch,IDEpreuve,dateMatch) VALUES
+INSERT INTO MatchIndividuel (NomMatch, IDEpreuve, dateMatch) VALUES
   ('50m nage libre',1,'2016/08/13'),
   ('100m nage libre',2,'2016/08/14'),
   ('200m nage libre',3,'2016/08/15'),
@@ -1521,7 +1521,7 @@ INSERT INTO MatchIndividuel (NomMatch,IDEpreuve,dateMatch) VALUES
   ('Marathon',42,'2016/08/21'),
   ('Marathon',43,'2016/08/21');
 
-INSERT INTO ParticipationCollectif (IDMatch,IDParticipant,statut,score) VALUES
+INSERT INTO ParticipationCollectif (IDMatch, IDParticipant, statut, score) VALUES
   (13,116,'Victoire','26'),
   (13,8,'Défaite','20'),
   (14,98,'Défaite','12'),
@@ -1557,11 +1557,7 @@ INSERT INTO ParticipationCollectif (IDMatch,IDParticipant,statut,score) VALUES
   (2, 20, 'Défaite','37.55 sec'),
   (2, 128, 'Défaite','37.54 sec');
 
-INSERT INTO ParticipationIndividuelle (IDMatch,IDParticipant,statut,score) VALUES
-  --epreuve dont on a besoin = 3;36;37;38;39;40;41;42;43;8
-  --gagnant epreuve 3 =156;7;21
-  --epreuve 8 = 158;157;44
-  --
+INSERT INTO ParticipationIndividuelle (IDMatch, IDParticipant, Statut, Score) VALUES
   (3,158,'Victoire','45s'),
   (3,157,'Victoire','47s'),
   (3,44,'Victoire','49s'),
@@ -1611,7 +1607,7 @@ INSERT INTO ParticipationIndividuelle (IDMatch,IDParticipant,statut,score) VALUE
   (105,129,'Victoire','02:24:20'),
   (105,12,'Défaite','02:25:50');
 
-INSERT INTO Membres (IDAthlete,IDequipe)
+INSERT INTO Membres (IDAthlete, IDequipe)
   SELECT IDAthlete,idequipe
   FROM Athlete,Equipe
   WHERE Athlete.sexe = Equipe.sexe
