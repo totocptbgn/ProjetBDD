@@ -123,27 +123,22 @@ ORDER BY NbrMedaille DESC;
 \echo '3. Pour chaque épreuve, le nom et la nationalité de l\'athlète ayant obtenu la médaille d\'or, ainsi que le nom et la nationalité de'
 \echo '   celui ayant obtenu la médaille d\'argent (tableau résultat avec 5 attributs)'
 
-\echo
-\echo '   /!\\ À REFAIRE /!\\'
-\echo
-
-  /*
-  SELECT nomEpreuve,
-  A_OR.nomAthlete AS GagnantOR,
-  A_OR.pays,
-  A_ARGENT.nomAthlete AS GagnantArgent,
-  A_ARGENT.pays,
-  A_BRONZE.nomAthlete AS GagnantBronze,
-  A_BRONZE.pays
-  FROM Athlete AS A_OR,
-  Athlete AS A_Argent,
-  Athlete AS A_Bronze,
-  MedailleIndividuel,
-  EpreuveIndividuel
-  WHERE (A_OR.IDAthlete = IDGagnant AND type = 'Or')
-  OR (A_ARGENT.IDAthlete = IDGagnant AND type = 'Argent')
-  OR (A_BRONZE.IDAthlete = IDGagnant AND type = 'Bronze');
-  */
+SELECT EpreuveIndividuel.nomEpreuve,
+A_OR.nomAthlete AS Gagnant_OR,
+A_OR.pays,
+A_ARGENT.nomAthlete AS Gagnant_Argent,
+A_ARGENT.pays
+FROM EpreuveIndividuel,
+Athlete AS A_OR,
+Athlete AS A_Argent,
+MedailleIndividuel AS M_OR,
+MedailleIndividuel AS M_Argent
+WHERE (A_OR.IDAthlete = M_OR.IDGagnant
+  AND M_OR.type = 'Or'
+  AND M_OR.IDEpreuve = EpreuveIndividuel.IDEpreuve)
+AND (A_ARGENT.IDAthlete = M_ARGENT.IDGagnant
+  AND M_ARGENT.type = 'Argent'
+  AND M_ARGENT.IDEpreuve = EpreuveIndividuel.IDEpreuve);
 
 \echo '4. Les athlètes qui n\'ont obtenu aucune médaille d\'or'
 
