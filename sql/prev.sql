@@ -11,22 +11,22 @@ DROP TABLE IF EXISTS MatchIndividuel CASCADE;
 DROP TABLE IF EXISTS MatchCollectif CASCADE;
 
 CREATE TABLE MatchIndividuel (
-	NomMatch text,
+	NomMatch text not null,
 	IDMatch serial primary key,
-	dateMatch date NOT NULL,
-	IDEpreuve int,
-  Lieu text,
-  nbrVolontaires int,
+	dateMatch date not null,
+	IDEpreuve int not null,
+  Lieu text not null,
+  nbrVolontaires int not null,
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuelle(IDEpreuve)
 );
 
 CREATE TABLE MatchCollectif (
-	NomMatch text,
+	NomMatch text not null,
 	IDMatch serial primary key,
-	dateMatch date NOT NULL,
-	IDEpreuve int,
-  Lieu text,
-  nbrVolontaires int,
+	dateMatch date not null,
+	IDEpreuve int not null,
+  Lieu text not null,
+  nbrVolontaires int not null,
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve)
 );
 
@@ -203,11 +203,9 @@ INSERT INTO MatchCollectif (NomMatch,IDEpreuve,dateMatch,Lieu,nbrVolontaires) VA
   ('Demi finale',28,'2016/08/15','Maracana, Stade Olympique',18),
   ('Finale',28,'2016/08/16','Maracana, Stade Olympique',24);
 
-
 -- Clear la console
 --
 \! clear
-
 
 -- Requetes
 --

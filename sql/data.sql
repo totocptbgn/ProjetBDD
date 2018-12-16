@@ -1608,8 +1608,8 @@ INSERT INTO ParticipationIndividuelle (IDMatch, IDParticipant, Statut, Score) VA
   (105,12,'Défaite','02:25:50');
 
 INSERT INTO Membres (IDAthlete, IDequipe)
-  SELECT IDAthlete,idequipe
-  FROM Athlete,Equipe
-  WHERE Athlete.sexe = Equipe.sexe
-  AND Athlete.pays = Equipe.pays
+  SELECT Athlete.IDAthlete, Equipe.IDEquipe
+  FROM Athlete, Equipe
+  WHERE Athlete.Sexe = Equipe.Sexe
+  AND Athlete.Pays = Equipe.Pays
   AND Athlete.IDSport = Equipe.IDSport;

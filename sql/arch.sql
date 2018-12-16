@@ -27,41 +27,40 @@ DROP TABLE IF EXISTS Sport CASCADE;
 
 -- Création des tables
 --
-
 CREATE TABLE Sport (
 	--
-	-- liste des sports avec ID et nom
-	-- le champs type détérmine si c'est un sport collectif ou individuel.
+	-- Liste les sports avec ID et nom.
+	-- Le champs `type` détérmine si c'est un sport collectif ou individuel.
 	--
-	IDSport SERIAL PRIMARY KEY,
-	type text not null,
-	nomSport text not null,
+	IDSport serial PRIMARY KEY,
+	type text,
+	nomSport text,
 
 	CHECK (type IN ('Collectif', 'Individuel'))
 );
 
 CREATE TABLE Athlete (
 	--
-	-- liste des athletes avec ID, nom, pays, sport, age et sexe
-	-- le champs pays est le nom du pays, il n'y pas de table pays
+	-- Liste les athletes avec ID, nom, pays, sport, age et sexe.
+	-- Le champs `Pays` est le nom du pays, il n'y pas de table Pays.
 	--
 	IDAthlete serial primary key,
-	NomAthlete text not null,
-	Pays text not null,
+	NomAthlete text,
+	Pays text,
 	IDSport int,
 	Age int,
-	sexe text not null,
+	sexe text,
 
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
 
 CREATE TABLE Equipe (
 	--
-	-- liste des équipes avec ID, pays, sport et sexe
-	-- il ne peut avoir que une équipe par sport, par pays et par sexe
+	-- Liste des équipes avec ID, pays, sport et sexe.
+	-- Il ne peut avoir que une équipe par sport, par pays et par sexe.
 	--
 	IDEquipe serial primary key,
-	Pays text not null,
+	Pays text,
 	IDSport int,
 	sexe text,
 
@@ -70,14 +69,14 @@ CREATE TABLE Equipe (
 
 CREATE TABLE EpreuveIndividuelle (
 	--
-	-- liste des épreuves individuels avec ID, sport, nom, id des gagnants de chaque médailles, sexe et type de typeScore
-	-- les id des gagnants correspondent à des athlètes
-	-- typeScore indique si le score se compte en points ou en temps
+	-- Liste des épreuves individuels avec ID, sport, nom, id des gagnants de chaque médailles, sexe et type de typeScore.
+	-- Les id des gagnants correspondent à des athlètes.
+	-- `typeScore` indique si le score se compte en points ou en temps.
 	--
 	IDEpreuve serial primary key,
 	IDSport int,
-	nomEpreuve text not null,
-	Sexe text not null,
+	nomEpreuve text,
+	Sexe text,
 	typeScore text,
 
 	CHECK (typeScore IN ('Score', 'Temps')),
@@ -86,14 +85,14 @@ CREATE TABLE EpreuveIndividuelle (
 
 CREATE TABLE EpreuveCollective (
 	--
-	-- liste des épreuves collectives avec ID, sport, nom, id des gagnants de chaque médailles, sexe et type de typeScore
-	-- les id des gagnants correspondent à des équipes
+	-- Liste des épreuves collectives avec ID, sport, nom, id des gagnants de chaque médailles, sexe et type de typeScore
+	-- Les id des gagnants correspondent à des équipes
 	-- typeScore indique si le score se compte en points ou en temps
 	--
 	IDEpreuve serial primary key,
 	IDSport int,
-	nomEpreuve text not null,
-	Sexe text not null,
+	nomEpreuve text,
+	Sexe text,
 	typeScore text,
 
 	CHECK (typeScore IN ('Score', 'Temps')),
@@ -107,7 +106,7 @@ CREATE TABLE MatchIndividuel (
 	--
 	NomMatch text,
 	IDMatch serial primary key,
-	dateMatch date NOT NULL,
+	dateMatch date,
 	IDEpreuve int,
 
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuelle(IDEpreuve)
@@ -119,7 +118,7 @@ CREATE TABLE MatchCollectif (
 	--
 	NomMatch text,
 	IDMatch serial primary key,
-	dateMatch date NOT NULL,
+	dateMatch date,
 	IDEpreuve int,
 
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve)
@@ -133,7 +132,7 @@ CREATE TABLE MedailleIndividuelle (
 	IDMedaille serial primary key,
 	IDEpreuve int,
 	IDGagnant int,
-	type text not null,
+	type text,
 
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuelle(IDEpreuve),
 	FOREIGN KEY (IDGagnant) REFERENCES Athlete(IDAthlete)
@@ -147,7 +146,7 @@ CREATE TABLE MedailleCollective (
 	IDMedaille serial primary key,
 	IDEpreuve int,
 	IDGagnant int,
-	type text not null,
+	type text,
 
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve),
 	FOREIGN KEY (IDGagnant) REFERENCES Equipe(IDequipe)
