@@ -19,7 +19,7 @@ DROP TABLE IF EXISTS Equipe CASCADE;
 DROP TABLE IF EXISTS MatchCollectif CASCADE;
 DROP TABLE IF EXISTS MatchIndividuel CASCADE;
 DROP TABLE IF EXISTS MedailleCollective CASCADE;
-DROP TABLE IF EXISTS MedailleIndividuel CASCADE;
+DROP TABLE IF EXISTS MedailleIndividuelle CASCADE;
 DROP TABLE IF EXISTS Membres CASCADE;
 DROP TABLE IF EXISTS ParticipationCollective CASCADE;
 DROP TABLE IF EXISTS ParticipationIndividuelle CASCADE;
@@ -126,7 +126,7 @@ CREATE TABLE MatchCollectif (
 );
 
 
-CREATE TABLE MedailleIndividuel (
+CREATE TABLE MedailleIndividuelle (
 	--
 	-- liste les médailles gagnées par un athlète avec id, épreuve, et athlète/équipe
 	--

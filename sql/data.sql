@@ -1131,7 +1131,7 @@ INSERT INTO EpreuveIndividuelle(IDSport, nomEpreuve, Sexe) VALUES
   (3,'Marathon','Homme'),
   (3,'Marathon','Femme');
 
-INSERT INTO MedailleIndividuel (type,  IDEpreuve,  IDGagnant) VALUES
+INSERT INTO MedailleIndividuelle (type,  IDEpreuve,  IDGagnant) VALUES
   ('Or', 1, 7),
   ('Argent', 1, 21),
   ('Bronze', 1, 56),

@@ -13,15 +13,15 @@
 \echo '1. La liste des athlètes italiens ayant obtenu une médaille :'
 
 SELECT DISTINCT NomAthlete AS Athlete
-FROM Athlete, MedailleIndividuel
-WHERE Athlete.IDAthlete = MedailleIndividuel.IDGagnant
+FROM Athlete, MedailleIndividuelle
+WHERE Athlete.IDAthlete = MedailleIndividuelle.IDGagnant
 AND Athlete.Pays = 'Italie';
 
 \echo '2. Le nom et la nationalité des médaillés du 100m, 200m, et 400m avec à chaque fois le type de médaille (or, argent, bronze) :'
 
-SELECT Athlete.NomAthlete AS Nom, Athlete.Pays, MedailleIndividuel.type
-FROM Athlete, MedailleIndividuel
-WHERE Athlete.IDAthlete = MedailleIndividuel.IDGagnant
+SELECT Athlete.NomAthlete AS Nom, Athlete.Pays, MedailleIndividuelle.type
+FROM Athlete, MedailleIndividuelle
+WHERE Athlete.IDAthlete = MedailleIndividuelle.IDGagnant
 AND IDEpreuve IN (
   SELECT IDEpreuve
   FROM EpreuveIndividuelle
@@ -54,10 +54,10 @@ AND IDAthlete IN (
 
 \echo '   (Pas faisable sans ratacher la participation à la médaille...) Requête sans le temps :'
 
-SELECT EpreuveIndividuelle.nomEpreuve, MedailleIndividuel.type
-FROM EpreuveIndividuelle, MedailleIndividuel
-WHERE EpreuveIndividuelle.IDEpreuve = MedailleIndividuel.IDEpreuve
-AND MedailleIndividuel.IDGagnant IN (
+SELECT EpreuveIndividuelle.nomEpreuve, MedailleIndividuelle.type
+FROM EpreuveIndividuelle, MedailleIndividuelle
+WHERE EpreuveIndividuelle.IDEpreuve = MedailleIndividuelle.IDEpreuve
+AND MedailleIndividuelle.IDGagnant IN (
   SELECT IDAthlete
   FROM Athlete
   WHERE nomAthlete = 'Michael Phelps'
@@ -105,9 +105,9 @@ GROUP BY Pays;
 \echo '2. Le nombre de médailles par pays représentés (rappel : une seule médaille est comptée pour une équipe) :'
 
 WITH Medailles (IDMedaille, Pays) AS (
-  SELECT MedailleIndividuel.IDMedaille, Athlete.Pays
-  FROM MedailleIndividuel, Athlete
-  WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
+  SELECT MedailleIndividuelle.IDMedaille, Athlete.Pays
+  FROM MedailleIndividuelle, Athlete
+  WHERE MedailleIndividuelle.IDGagnant = Athlete.IDAthlete
   UNION ALL
   SELECT MedailleCollective.IDMedaille, Equipe.Pays
   FROM MedailleCollective, Equipe
@@ -129,8 +129,8 @@ A_ARGENT.pays
 FROM EpreuveIndividuelle,
 Athlete AS A_OR,
 Athlete AS A_Argent,
-MedailleIndividuel AS M_OR,
-MedailleIndividuel AS M_Argent
+MedailleIndividuelle AS M_OR,
+MedailleIndividuelle AS M_Argent
 WHERE (A_OR.IDAthlete = M_OR.IDGagnant
   AND M_OR.type = 'Or'
   AND M_OR.IDEpreuve = EpreuveIndividuelle.IDEpreuve)
@@ -144,7 +144,7 @@ SELECT *
 FROM Athlete
 WHERE IDAthlete NOT IN (
   SELECT IDGagnant
-  FROM MedailleIndividuel
+  FROM MedailleIndividuelle
   WHERE type = 'Or'
 )
 LIMIT 10; -- On affiche seulement 10 tuples pour ne pas à avoir à afficher tout les athlètes.
@@ -158,8 +158,8 @@ WHERE Sport.IDSport IN (
   FROM EpreuveIndividuelle
   WHERE EpreuveIndividuelle.IDEpreuve IN (
     SELECT IDEpreuve
-    FROM MedailleIndividuel
-    WHERE MedailleIndividuel.IDGagnant NOT IN (
+    FROM MedailleIndividuelle
+    WHERE MedailleIndividuelle.IDGagnant NOT IN (
       SELECT IDAthlete
       FROM Athlete
       WHERE Athlete.Pays = 'France'
@@ -217,9 +217,9 @@ AND IDAthlete NOT IN (
 
 WITH SportPays (nomSport, Pays) AS (
   SELECT Sport.nomSport, Athlete.Pays
-  FROM MedailleIndividuel, Athlete, EpreuveIndividuelle, Sport
-  WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
-  AND EpreuveIndividuelle.IDEpreuve = MedailleIndividuel.IDEpreuve
+  FROM MedailleIndividuelle, Athlete, EpreuveIndividuelle, Sport
+  WHERE MedailleIndividuelle.IDGagnant = Athlete.IDAthlete
+  AND EpreuveIndividuelle.IDEpreuve = MedailleIndividuelle.IDEpreuve
   AND EpreuveIndividuelle.IDSport = Sport.IDSport
   UNION ALL
   SELECT Sport.nomSport, Equipe.Pays
@@ -253,9 +253,9 @@ LIMIT 5;
 \echo '4. Le pourcentage de médailles remportées par des femmes (y compris en équipe) :'
 
 WITH Medailles (IDGagnant, Sexe) AS (
-  SELECT MedailleIndividuel.IDGagnant, Athlete.sexe
-  FROM MedailleIndividuel, Athlete
-  WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
+  SELECT MedailleIndividuelle.IDGagnant, Athlete.sexe
+  FROM MedailleIndividuelle, Athlete
+  WHERE MedailleIndividuelle.IDGagnant = Athlete.IDAthlete
   UNION ALL
   SELECT MedailleCollective.IDGagnant, Equipe.sexe
   FROM MedailleCollective, Equipe
@@ -276,10 +276,10 @@ GROUP BY Sexe;
 \echo '6. Les pays qui ont obtenu plus de médailles que la France dans chaque sport :'
 
 WITH MedaillePaysPart (Pays, Sport, nbMedaillesTotal) AS (
-  SELECT Athlete.Pays, Sport.nomSport, COUNT(MedailleIndividuel.IDMedaille)
-  FROM Athlete, Sport, MedailleIndividuel, EpreuveIndividuelle
+  SELECT Athlete.Pays, Sport.nomSport, COUNT(MedailleIndividuelle.IDMedaille)
+  FROM Athlete, Sport, MedailleIndividuelle, EpreuveIndividuelle
   WHERE EpreuveIndividuelle.IDSport = Sport.IDSport
-  AND MedailleIndividuel.IDGagnant = Athlete.IDAthlete
+  AND MedailleIndividuelle.IDGagnant = Athlete.IDAthlete
   GROUP BY Athlete.Pays, Sport.nomSport
   UNION ALL
   SELECT Equipe.Pays, Sport.nomSport, COUNT(MedailleCollective.IDMedaille)
@@ -302,9 +302,9 @@ WHERE nbMedaillesTotal > ALL (
 \echo 'Les 10 pays qui ont remportés le plus de medailles :'
 
 WITH MedaillePays (IDMedaille, Pays) AS (
-  SELECT MedailleIndividuel.IDMedaille, Athlete.Pays
-  FROM MedailleIndividuel, Athlete
-  WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
+  SELECT MedailleIndividuelle.IDMedaille, Athlete.Pays
+  FROM MedailleIndividuelle, Athlete
+  WHERE MedailleIndividuelle.IDGagnant = Athlete.IDAthlete
   UNION ALL
   SELECT MedailleCollective.IDMedaille, Equipe.Pays
   FROM MedailleCollective, Equipe
