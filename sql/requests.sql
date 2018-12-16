@@ -212,11 +212,26 @@ AND IDAthlete NOT IN (
 \echo '   Pas fait...'
 \echo
 
-\echo '2. Les pays qui ont eu une médaille dans chaque catégorie sportive (pas forcément à toutes les épreuves de cette catégorie) :'
+\echo '2. Les pays qui ont eu une médaille dans chaque catégorie sportive (pas forcément à toutes les épreuves de cette catégorie et'
+\echo 'par catégorie, on considère ici Sport :'
 
-\echo
-\echo '   Pas fait...'
-\echo
+WITH SportPays (nomSport, Pays) AS (
+  SELECT Sport.nomSport, Athlete.Pays
+  FROM MedailleIndividuel, Athlete, EpreuveIndividuel, Sport
+  WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
+  AND EpreuveIndividuel.IDEpreuve = MedailleIndividuel.IDEpreuve
+  AND EpreuveIndividuel.IDSport = Sport.IDSport
+  UNION ALL
+  SELECT Sport.nomSport, Equipe.Pays
+  FROM MedailleCollectif, Equipe, EpreuveCollective, Sport
+  WHERE MedailleCollectif.IDGagnant = Equipe.IDEquipe
+  AND EpreuveCollective.IDEpreuve = MedailleCollectif.IDEpreuve
+  AND EpreuveCollective.IDSport = Sport.IDSport
+)
+SELECT Pays
+FROM SportPays
+GROUP BY Pays
+HAVING COUNT(DISTINCT nomSport) > (SELECT COUNT(nomSport) FROM Sport);
 
 \echo '3. Les cinq catégories sportives pour lesquelles il y a le moins d\'épreuves :'
 
