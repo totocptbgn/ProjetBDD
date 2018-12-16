@@ -266,7 +266,7 @@ FROM Medailles
 WHERE Sexe = 'Femme'
 GROUP BY Sexe;
 
-\echo '5. Le nombre total de points marqués par l\'équipe féminine de handball qui a marqué plus de points que chaque équipe masculine :'
+\echo '5. Le nombre total de points marqués par l\'équipe féminine de handball qui a marqué plus de points que chaque équipe masculine'
 \echo '   de handball tout au long des jeux :'
 
 \echo

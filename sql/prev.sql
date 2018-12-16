@@ -11,22 +11,22 @@ DROP TABLE IF EXISTS MatchIndividuel CASCADE;
 DROP TABLE IF EXISTS MatchCollectif CASCADE;
 
 CREATE TABLE MatchIndividuel (
-	NomMatch text not null,
+	NomMatch text,
 	IDMatch serial primary key,
-	dateMatch date not null,
-	IDEpreuve int not null,
-  Lieu text not null,
-  nbrVolontaires int not null,
+	dateMatch date,
+	IDEpreuve int,
+  Lieu text,
+  nbrVolontaires int,
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuelle(IDEpreuve)
 );
 
 CREATE TABLE MatchCollectif (
-	NomMatch text not null,
+	NomMatch text,
 	IDMatch serial primary key,
-	dateMatch date not null,
-	IDEpreuve int not null,
-  Lieu text not null,
-  nbrVolontaires int not null,
+	dateMatch date,
+	IDEpreuve int,
+  Lieu text,
+  nbrVolontaires int,
 	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveCollective(IDEpreuve)
 );
 
