@@ -87,7 +87,7 @@ CREATE TABLE EpreuveCollective (
 	--
 	-- Liste des épreuves collectives avec ID, sport, nom, id des gagnants de chaque médailles, sexe et type de typeScore
 	-- Les id des gagnants correspondent à des équipes
-	-- typeScore indique si le score se compte en points ou en temps
+	-- `typeScore` indique si le score se compte en points ou en temps
 	--
 	IDEpreuve serial primary key,
 	IDSport int,
@@ -102,7 +102,7 @@ CREATE TABLE EpreuveCollective (
 
 CREATE TABLE MatchIndividuel (
 	--
-	-- liste des matchs individuels avec nom, id, date, et épreuve
+	-- Liste des matchs individuels avec nom, id, date, et épreuve.
 	--
 	NomMatch text,
 	IDMatch serial primary key,
@@ -114,7 +114,7 @@ CREATE TABLE MatchIndividuel (
 
 CREATE TABLE MatchCollectif (
 	--
-	-- liste des matchs collectifs avec nom, id, date, et épreuve
+	-- Liste des matchs collectifs avec nom, id, date, et épreuve.
 	--
 	NomMatch text,
 	IDMatch serial primary key,
@@ -127,7 +127,7 @@ CREATE TABLE MatchCollectif (
 
 CREATE TABLE MedailleIndividuelle (
 	--
-	-- liste les médailles gagnées par un athlète avec id, épreuve, et athlète/équipe
+	-- Liste les médailles gagnées par un athlète avec id, épreuve, et athlète.
 	--
 	IDMedaille serial primary key,
 	IDEpreuve int,
@@ -140,8 +140,8 @@ CREATE TABLE MedailleIndividuelle (
 
 CREATE TABLE MedailleCollective (
 	--
-	-- liste les médailles gagnées par une équipe avec id, épreuve, et athlète/équipe
-	-- si une équipe remporte une épreuve c'est l'équipe qui gagne qui obtient la médaille, pas les membres
+	-- Liste les médailles gagnées par une équipe avec id, épreuve, et équipe.
+	-- Si une équipe remporte une épreuve c'est l'équipe qui gagne qui obtient la médaille, pas les membres.
 	--
 	IDMedaille serial primary key,
 	IDEpreuve int,
@@ -154,10 +154,10 @@ CREATE TABLE MedailleCollective (
 
 CREATE TABLE ParticipationCollective (
 	--
-	-- liste des participants à un match avec id d'équipe, statut
-	-- fais le lien entre la table MatchIndividuel et la table Équipe
-	-- status détermine si le participant à gagné ou perdu
-	-- score est de type text et contient soit un score, soit un temps
+	-- Liste des participants à un match avec id d'équipe, statut, idMatch et score.
+	-- Fais le lien entre la table MatchIndividuel et la table Équipe.
+	-- `status` détermine si le participant à gagné ou perdu.
+	-- `score` est de type text et contient soit un score, soit un temps.
 	--
 	IDMatch int,
 	IDParticipant int,
@@ -172,10 +172,10 @@ CREATE TABLE ParticipationCollective (
 
 CREATE TABLE ParticipationIndividuelle (
 	--
-	-- liste des participants à un match avec id d'athlete, statut
-	-- fais le lien entre la table MatchIndividuel et la table Athlete
-	-- status détermine si le participant à gagné ou perdu
-	-- score est de type text et contient soit un score, soit un temps
+	-- Liste des participants à un match avec id d'athlete, statut, idMatch et score.
+	-- Fais le lien entre la table MatchIndividuel et la table Athlete.
+	-- `status` détermine si le participant à gagné ou perdu.
+	-- `score` est de type text et contient soit un score, soit un temps.
 	--
 	IDMatch int,
 	IDParticipant int,
@@ -191,8 +191,8 @@ CREATE TABLE ParticipationIndividuelle (
 
 CREATE TABLE Membres (
 	--
-	-- liste les membres d'une équipe
-	-- fais le lien entre la table Athlete et la table Equipe
+	-- Liste les membres d'une équipe.
+	-- Fais le lien entre la table Athlete et la table Equipe
 	--
 	IDAthlete int,
 	IDEquipe int,
