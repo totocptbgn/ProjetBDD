@@ -299,23 +299,71 @@ WHERE nbMedaillesTotal > ALL (
 \echo '+---------------------------------------| Requêtes Perso |---------------------------------------+'
 \echo
 
-\echo 'Les 10 pays qui ont remportés le plus de medailles :'
+\echo 'Classement des pays ayant gagné le plus de medailles avec le nombre de'
+\echo 'medailles par type (Or, Argent ou Bronze) :'
 
-WITH MedaillePays (IDMedaille, Pays) AS (
-  SELECT MedailleIndividuelle.IDMedaille, Athlete.Pays
-  FROM MedailleIndividuelle, Athlete
-  WHERE MedailleIndividuelle.IDGagnant = Athlete.IDAthlete
-  UNION ALL
-  SELECT MedailleCollective.IDMedaille, Equipe.Pays
-  FROM MedailleCollective, Equipe
-  WHERE MedailleCollective.IDGagnant = Equipe.IDequipe
-)
-SELECT COUNT(IDMedaille) AS NbrMedaille, Pays
-FROM MedaillePays
-GROUP BY Pays
-ORDER BY NbrMedaille DESC;
+CREATE VIEW MedailleOr (nbrOr, Pays) AS (
+  WITH MedaillesOr (IDMedaille, Pays) AS (
+    SELECT MedailleIndividuelle.IDMedaille, Athlete.Pays
+    FROM MedailleIndividuelle, Athlete
+    WHERE MedailleIndividuelle.IDGagnant = Athlete.IDAthlete
+    AND MedailleIndividuelle.type = 'Or'
+    UNION ALL
+    SELECT MedailleCollective.IDMedaille, Equipe.Pays
+    FROM MedailleCollective, Equipe
+    WHERE MedailleCollective.IDGagnant = Equipe.IDequipe
+    AND MedailleCollective.type = 'Or'
+  )
+  SELECT COUNT(IDMedaille), Pays
+  FROM MedaillesOr
+  GROUP BY Pays
+);
 
-\echo 'Les athlètes et équipes qui n\'ont concouru que le 15 août :'
+CREATE VIEW MedailleArgent (nbrArgent, Pays) AS (
+  WITH MedaillesArgent (IDMedaille, Pays) AS (
+    SELECT MedailleIndividuelle.IDMedaille, Athlete.Pays
+    FROM MedailleIndividuelle, Athlete
+    WHERE MedailleIndividuelle.IDGagnant = Athlete.IDAthlete
+    AND MedailleIndividuelle.type = 'Argent'
+    UNION ALL
+    SELECT MedailleCollective.IDMedaille, Equipe.Pays
+    FROM MedailleCollective, Equipe
+    WHERE MedailleCollective.IDGagnant = Equipe.IDequipe
+    AND MedailleCollective.type = 'Argent'
+  )
+  SELECT COUNT(IDMedaille), Pays
+  FROM MedaillesArgent
+  GROUP BY Pays
+);
+
+CREATE VIEW MedailleBronze (nbrBronze, Pays) AS (
+  WITH MedaillesBronze (IDMedaille, Pays) AS (
+    SELECT MedailleIndividuelle.IDMedaille, Athlete.Pays
+    FROM MedailleIndividuelle, Athlete
+    WHERE MedailleIndividuelle.IDGagnant = Athlete.IDAthlete
+    AND MedailleIndividuelle.type = 'Bronze'
+    UNION ALL
+    SELECT MedailleCollective.IDMedaille, Equipe.Pays
+    FROM MedailleCollective, Equipe
+    WHERE MedailleCollective.IDGagnant = Equipe.IDequipe
+    AND MedailleCollective.type = 'Bronze'
+  )
+  SELECT COUNT(IDMedaille), Pays
+  FROM MedaillesBronze
+  GROUP BY Pays
+);
+
+SELECT MedailleOr.Pays, MedailleOr.nbrOr AS Or, MedailleArgent.NbrArgent AS Argent, MedailleBronze.nbrBronze AS Bronze
+FROM MedailleOr, MedailleArgent, MedailleBronze
+WHERE MedailleOr.Pays = MedailleArgent.Pays
+AND MedailleArgent.Pays = MedailleBronze.Pays
+ORDER BY (MedailleOr.nbrOr * 3) + (MedailleArgent.NbrArgent * 2) + (MedailleBronze.nbrBronze) DESC;
+
+DROP VIEW MedailleOr;
+DROP VIEW MedailleArgent;
+DROP VIEW MedailleBronze;
+
+\echo 'Les athlètes qui n\'ont concouru que le 15 août :'
 
 SELECT Athlete.NomAthlete
 FROM Athlete
