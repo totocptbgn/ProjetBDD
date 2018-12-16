@@ -17,7 +17,7 @@ CREATE TABLE MatchIndividuel (
 	IDEpreuve int,
   Lieu text,
   nbrVolontaires int,
-	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve)
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuelle(IDEpreuve)
 );
 
 CREATE TABLE MatchCollectif (

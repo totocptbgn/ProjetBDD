@@ -14,14 +14,14 @@ SET client_min_messages TO WARNING;
 --
 DROP TABLE IF EXISTS Athlete CASCADE;
 DROP TABLE IF EXISTS EpreuveCollective CASCADE;
-DROP TABLE IF EXISTS EpreuveIndividuel CASCADE;
+DROP TABLE IF EXISTS EpreuveIndividuelle CASCADE;
 DROP TABLE IF EXISTS Equipe CASCADE;
 DROP TABLE IF EXISTS MatchCollectif CASCADE;
 DROP TABLE IF EXISTS MatchIndividuel CASCADE;
-DROP TABLE IF EXISTS MedailleCollectif CASCADE;
+DROP TABLE IF EXISTS MedailleCollective CASCADE;
 DROP TABLE IF EXISTS MedailleIndividuel CASCADE;
 DROP TABLE IF EXISTS Membres CASCADE;
-DROP TABLE IF EXISTS ParticipationCollectif CASCADE;
+DROP TABLE IF EXISTS ParticipationCollective CASCADE;
 DROP TABLE IF EXISTS ParticipationIndividuelle CASCADE;
 DROP TABLE IF EXISTS Sport CASCADE;
 
@@ -68,7 +68,7 @@ CREATE TABLE Equipe (
 	FOREIGN KEY (IDSport) REFERENCES Sport(IDSport)
 );
 
-CREATE TABLE EpreuveIndividuel (
+CREATE TABLE EpreuveIndividuelle (
 	--
 	-- liste des épreuves individuels avec ID, sport, nom, id des gagnants de chaque médailles, sexe et type de typeScore
 	-- les id des gagnants correspondent à des athlètes
@@ -110,7 +110,7 @@ CREATE TABLE MatchIndividuel (
 	dateMatch date NOT NULL,
 	IDEpreuve int,
 
-	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve)
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuelle(IDEpreuve)
 );
 
 CREATE TABLE MatchCollectif (
@@ -135,11 +135,11 @@ CREATE TABLE MedailleIndividuel (
 	IDGagnant int,
 	type text not null,
 
-	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuel(IDEpreuve),
+	FOREIGN KEY (IDEpreuve) REFERENCES EpreuveIndividuelle(IDEpreuve),
 	FOREIGN KEY (IDGagnant) REFERENCES Athlete(IDAthlete)
 );
 
-CREATE TABLE MedailleCollectif (
+CREATE TABLE MedailleCollective (
 	--
 	-- liste les médailles gagnées par une équipe avec id, épreuve, et athlète/équipe
 	-- si une équipe remporte une épreuve c'est l'équipe qui gagne qui obtient la médaille, pas les membres
@@ -153,7 +153,7 @@ CREATE TABLE MedailleCollectif (
 	FOREIGN KEY (IDGagnant) REFERENCES Equipe(IDequipe)
 );
 
-CREATE TABLE ParticipationCollectif (
+CREATE TABLE ParticipationCollective (
 	--
 	-- liste des participants à un match avec id d'équipe, statut
 	-- fais le lien entre la table MatchIndividuel et la table Équipe

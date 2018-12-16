@@ -24,7 +24,7 @@ FROM Athlete, MedailleIndividuel
 WHERE Athlete.IDAthlete = MedailleIndividuel.IDGagnant
 AND IDEpreuve IN (
   SELECT IDEpreuve
-  FROM EpreuveIndividuel
+  FROM EpreuveIndividuelle
   WHERE nomEpreuve = '100m'
   OR nomEpreuve = '200m'
   OR nomEpreuve = '400m'
@@ -54,9 +54,9 @@ AND IDAthlete IN (
 
 \echo '   (Pas faisable sans ratacher la participation à la médaille...) Requête sans le temps :'
 
-SELECT EpreuveIndividuel.nomEpreuve, MedailleIndividuel.type
-FROM EpreuveIndividuel, MedailleIndividuel
-WHERE EpreuveIndividuel.IDEpreuve = MedailleIndividuel.IDEpreuve
+SELECT EpreuveIndividuelle.nomEpreuve, MedailleIndividuel.type
+FROM EpreuveIndividuelle, MedailleIndividuel
+WHERE EpreuveIndividuelle.IDEpreuve = MedailleIndividuel.IDEpreuve
 AND MedailleIndividuel.IDGagnant IN (
   SELECT IDAthlete
   FROM Athlete
@@ -78,7 +78,7 @@ WHERE IDMatch IN (
   FROM MatchIndividuel
   WHERE IDEpreuve IN (
     SELECT IDEpreuve
-    FROM EpreuveIndividuel
+    FROM EpreuveIndividuelle
     WHERE nomEpreuve = 'Marathon'
   )
 );
@@ -96,7 +96,7 @@ AND IDMatch IN (
   FROM MatchIndividuel
   WHERE IDEpreuve IN (
     SELECT IDEpreuve
-    FROM EpreuveIndividuel
+    FROM EpreuveIndividuelle
     WHERE nomEpreuve = '200m nage libre'
   )
 )
@@ -109,9 +109,9 @@ WITH Medailles (IDMedaille, Pays) AS (
   FROM MedailleIndividuel, Athlete
   WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
   UNION ALL
-  SELECT MedailleCollectif.IDMedaille, Equipe.Pays
-  FROM MedailleCollectif, Equipe
-  WHERE MedailleCollectif.IDGagnant = Equipe.IDequipe
+  SELECT MedailleCollective.IDMedaille, Equipe.Pays
+  FROM MedailleCollective, Equipe
+  WHERE MedailleCollective.IDGagnant = Equipe.IDequipe
 )
 SELECT COUNT(IDMedaille) AS NbrMedaille, Pays
 FROM Medailles
@@ -121,22 +121,22 @@ ORDER BY NbrMedaille DESC;
 \echo '3. Pour chaque épreuve, le nom et la nationalité de l\'athlète ayant obtenu la médaille d\'or, ainsi que le nom et la nationalité de'
 \echo '   celui ayant obtenu la médaille d\'argent (tableau résultat avec 5 attributs) :'
 
-SELECT EpreuveIndividuel.nomEpreuve,
+SELECT EpreuveIndividuelle.nomEpreuve,
 A_OR.nomAthlete AS Gagnant_OR,
 A_OR.pays,
 A_ARGENT.nomAthlete AS Gagnant_Argent,
 A_ARGENT.pays
-FROM EpreuveIndividuel,
+FROM EpreuveIndividuelle,
 Athlete AS A_OR,
 Athlete AS A_Argent,
 MedailleIndividuel AS M_OR,
 MedailleIndividuel AS M_Argent
 WHERE (A_OR.IDAthlete = M_OR.IDGagnant
   AND M_OR.type = 'Or'
-  AND M_OR.IDEpreuve = EpreuveIndividuel.IDEpreuve)
+  AND M_OR.IDEpreuve = EpreuveIndividuelle.IDEpreuve)
 AND (A_ARGENT.IDAthlete = M_ARGENT.IDGagnant
   AND M_ARGENT.type = 'Argent'
-  AND M_ARGENT.IDEpreuve = EpreuveIndividuel.IDEpreuve);
+  AND M_ARGENT.IDEpreuve = EpreuveIndividuelle.IDEpreuve);
 
 \echo '4. Les athlètes qui n\'ont obtenu aucune médaille d\'or :'
 
@@ -155,8 +155,8 @@ SELECT DISTINCT nomSport AS Sport
 FROM Sport
 WHERE Sport.IDSport IN (
   SELECT IDSport
-  FROM EpreuveIndividuel
-  WHERE EpreuveIndividuel.IDEpreuve IN (
+  FROM EpreuveIndividuelle
+  WHERE EpreuveIndividuelle.IDEpreuve IN (
     SELECT IDEpreuve
     FROM MedailleIndividuel
     WHERE MedailleIndividuel.IDGagnant NOT IN (
@@ -177,7 +177,7 @@ WITH Temps (seconds, IDParticipant) AS (
     FROM MatchIndividuel
     WHERE IDEpreuve IN (
       SELECT IDEpreuve
-      FROM EpreuveIndividuel
+      FROM EpreuveIndividuelle
       WHERE nomEpreuve = '100m'
     )
   )
@@ -192,7 +192,7 @@ WHERE IDAthlete IN (
     FROM MatchIndividuel
     WHERE IDEpreuve IN (
       SELECT IDEpreuve
-      FROM EpreuveIndividuel
+      FROM EpreuveIndividuelle
       WHERE nomEpreuve = '100m'
     )
   )
@@ -213,19 +213,19 @@ AND IDAthlete NOT IN (
 \echo
 
 \echo '2. Les pays qui ont eu une médaille dans chaque catégorie sportive (pas forcément à toutes les épreuves de cette catégorie et'
-\echo 'par catégorie, on considère ici Sport :'
+\echo '   par catégorie, on considère ici Sport :'
 
 WITH SportPays (nomSport, Pays) AS (
   SELECT Sport.nomSport, Athlete.Pays
-  FROM MedailleIndividuel, Athlete, EpreuveIndividuel, Sport
+  FROM MedailleIndividuel, Athlete, EpreuveIndividuelle, Sport
   WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
-  AND EpreuveIndividuel.IDEpreuve = MedailleIndividuel.IDEpreuve
-  AND EpreuveIndividuel.IDSport = Sport.IDSport
+  AND EpreuveIndividuelle.IDEpreuve = MedailleIndividuel.IDEpreuve
+  AND EpreuveIndividuelle.IDSport = Sport.IDSport
   UNION ALL
   SELECT Sport.nomSport, Equipe.Pays
-  FROM MedailleCollectif, Equipe, EpreuveCollective, Sport
-  WHERE MedailleCollectif.IDGagnant = Equipe.IDEquipe
-  AND EpreuveCollective.IDEpreuve = MedailleCollectif.IDEpreuve
+  FROM MedailleCollective, Equipe, EpreuveCollective, Sport
+  WHERE MedailleCollective.IDGagnant = Equipe.IDEquipe
+  AND EpreuveCollective.IDEpreuve = MedailleCollective.IDEpreuve
   AND EpreuveCollective.IDSport = Sport.IDSport
 )
 SELECT Pays
@@ -237,8 +237,8 @@ HAVING COUNT(DISTINCT nomSport) > (SELECT COUNT(nomSport) FROM Sport);
 
 WITH Epreuves (IDEpreuves, nomSport) AS (
   SELECT IDEpreuve, Sport.nomSport
-  FROM EpreuveIndividuel, Sport
-  WHERE EpreuveIndividuel.IDSport = Sport.IDSport
+  FROM EpreuveIndividuelle, Sport
+  WHERE EpreuveIndividuelle.IDSport = Sport.IDSport
   UNION ALL
   SELECT IDEpreuve, Sport.nomSport
   FROM EpreuveCollective, Sport
@@ -257,9 +257,9 @@ WITH Medailles (IDGagnant, Sexe) AS (
   FROM MedailleIndividuel, Athlete
   WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
   UNION ALL
-  SELECT MedailleCollectif.IDGagnant, Equipe.sexe
-  FROM MedailleCollectif, Equipe
-  WHERE MedailleCollectif.IDGagnant = Equipe.IDEquipe
+  SELECT MedailleCollective.IDGagnant, Equipe.sexe
+  FROM MedailleCollective, Equipe
+  WHERE MedailleCollective.IDGagnant = Equipe.IDEquipe
 )
 SELECT CONCAT(CAST(COUNT(Sexe) * 100 / (Select COUNT(*) FROM Medailles) AS TEXT), ' %') AS Femme_Medailles
 FROM Medailles
@@ -277,15 +277,15 @@ GROUP BY Sexe;
 
 WITH MedaillePaysPart (Pays, Sport, nbMedaillesTotal) AS (
   SELECT Athlete.Pays, Sport.nomSport, COUNT(MedailleIndividuel.IDMedaille)
-  FROM Athlete, Sport, MedailleIndividuel, EpreuveIndividuel
-  WHERE EpreuveIndividuel.IDSport = Sport.IDSport
+  FROM Athlete, Sport, MedailleIndividuel, EpreuveIndividuelle
+  WHERE EpreuveIndividuelle.IDSport = Sport.IDSport
   AND MedailleIndividuel.IDGagnant = Athlete.IDAthlete
   GROUP BY Athlete.Pays, Sport.nomSport
   UNION ALL
-  SELECT Equipe.Pays, Sport.nomSport, COUNT(MedailleCollectif.IDMedaille)
-  FROM Equipe, Sport, MedailleCollectif, EpreuveCollective
+  SELECT Equipe.Pays, Sport.nomSport, COUNT(MedailleCollective.IDMedaille)
+  FROM Equipe, Sport, MedailleCollective, EpreuveCollective
   WHERE EpreuveCollective.IDSport = Sport.IDSport
-  AND MedailleCollectif.IDGagnant = Equipe.IDEquipe
+  AND MedailleCollective.IDGagnant = Equipe.IDEquipe
   GROUP BY Equipe.Pays, Sport.nomSport
 )
 SELECT MedaillePaysPart.Pays, MedaillePaysPart.Sport
@@ -306,9 +306,9 @@ WITH MedaillePays (IDMedaille, Pays) AS (
   FROM MedailleIndividuel, Athlete
   WHERE MedailleIndividuel.IDGagnant = Athlete.IDAthlete
   UNION ALL
-  SELECT MedailleCollectif.IDMedaille, Equipe.Pays
-  FROM MedailleCollectif, Equipe
-  WHERE MedailleCollectif.IDGagnant = Equipe.IDequipe
+  SELECT MedailleCollective.IDMedaille, Equipe.Pays
+  FROM MedailleCollective, Equipe
+  WHERE MedailleCollective.IDGagnant = Equipe.IDequipe
 )
 SELECT COUNT(IDMedaille) AS NbrMedaille, Pays
 FROM MedaillePays
@@ -335,20 +335,20 @@ AND Athlete.IDAthlete NOT IN (
 WITH Athletes (nomAthlete, Pays) AS (
   WITH PleinDAthletes (nomAthlete, Pays) AS (
     SELECT Athlete.nomAthlete, Athlete.Pays
-    FROM Athlete, ParticipationIndividuelle, Sport, MatchIndividuel, EpreuveIndividuel
+    FROM Athlete, ParticipationIndividuelle, Sport, MatchIndividuel, EpreuveIndividuelle
     WHERE Sport.nomSport = 'Athlétisme'
-    AND EpreuveIndividuel.IDSport = Sport.IDSport
-    AND MatchIndividuel.IDEpreuve = EpreuveIndividuel.IDEpreuve
+    AND EpreuveIndividuelle.IDSport = Sport.IDSport
+    AND MatchIndividuel.IDEpreuve = EpreuveIndividuelle.IDEpreuve
     AND ParticipationIndividuelle.IDMatch = MatchIndividuel.IDMatch
     AND Athlete.IDAthlete = ParticipationIndividuelle.IDParticipant
     UNION ALL
     SELECT Athlete.nomAthlete, Athlete.Pays
-    FROM Athlete, ParticipationCollectif, Membres, Sport, MatchCollectif, EpreuveCollective
+    FROM Athlete, ParticipationCollective, Membres, Sport, MatchCollectif, EpreuveCollective
     WHERE Sport.nomSport = 'Athlétisme'
     AND EpreuveCollective.IDSport = Sport.IDSport
     AND MatchCollectif.IDEpreuve = EpreuveCollective.IDEpreuve
-    AND ParticipationCollectif.IDMatch = MatchCollectif.IDMatch
-    AND Membres.IDEquipe = ParticipationCollectif.IDParticipant
+    AND ParticipationCollective.IDMatch = MatchCollectif.IDMatch
+    AND Membres.IDEquipe = ParticipationCollective.IDParticipant
     AND Athlete.IDAthlete = Membres.IDAthlete
   )
   SELECT DISTINCT *
