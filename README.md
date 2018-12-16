@@ -1,14 +1,13 @@
 
+
 # ProjetBDD
 
-⚠️ Le projet est en cours ! ⚠️
+Pour construire la base données : `psql -c "\i data.sql"`
+Tout les fichiers sql sont dans le dossier `sql/`. 
 
-Pour construire la base données : `psql --command "\i data.sql"`
+## Sujet et Rapport
 
-
-## Sujet
-
-Le sujet est disponible [ici](https://github.com/N07070/Projet-BDD/blob/master/projet.pdf).
+Le sujet est disponible [ici](https://github.com/totocptbgn/ProjetBDD/blob/master/docs/SujetProjet.pdf) et le rapport rendu est disponible [ici](https://github.com/totocptbgn/ProjetBDD/blob/master/docs/RapportProjetBDD3.pdf).
 
 ## Membres
 
@@ -16,4 +15,5 @@ Le sujet est disponible [ici](https://github.com/N07070/Projet-BDD/blob/master/p
 
 ## Schéma
 
-![Schéma](https://github.com/totocptbgn/ProjetBDD/blob/master/Schema_E-R.png)
+![Schéma](https://github.com/totocptbgn/ProjetBDD/blob/master/docs/Schema_E-R.png)
+
